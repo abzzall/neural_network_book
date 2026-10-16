@@ -1,0 +1,22 @@
+[
+ {"q": "How many messages are in the SMS Spam Collection used in this book?", "a": ["5574"]},
+ {"q": "Under which licence is the all-MiniLM-L6-v2 encoder released?", "a": ["apache"]},
+ {"q": "How many days of bike-rental data does chapter 16 use?", "a": ["731"]},
+ {"q": "On which date were the fewest bicycles rented in the bike data?", "a": ["29 october 2012", "october 29, 2012", "2012-10-29"]},
+ {"q": "What is the receptive field of the temporal convolutional network in chapter 16?", "a": ["63"]},
+ {"q": "What mean absolute scaled error does Holt-Winters reach in the chapter 16 backtest?", "a": ["1.204"]},
+ {"q": "Which mean return counts as solving the cart-pole task in chapter 19?", "a": ["475"]},
+ {"q": "After how many steps are cart-pole episodes cut off?", "a": ["500"]},
+ {"q": "What is the optimal value of the start state in the chapter 19 grid world?", "a": ["0.729"]},
+ {"q": "At which episode does REINFORCE with seed 1 first solve the cart-pole task?", "a": ["549"]},
+ {"q": "How often does the chapter 19 deep Q-network copy weights into its target network?", "a": ["1000"]},
+ {"q": "What mean AUC does the autoencoder reach over the held-out digit classes in chapter 20?", "a": ["0.912"]},
+ {"q": "How many noising steps does the chapter 20 diffusion model use?", "a": ["100"]},
+ {"q": "What perplexity does GPT-2 assign to the shuffled test sentence in chapter 21?", "a": ["6051.7"]},
+ {"q": "How many of the SMS messages are labelled spam?", "a": ["747"]},
+ {"q": "How many dimensions do the all-MiniLM-L6-v2 sentence embeddings have?", "a": ["384"]},
+ {"q": "How many parameters has the compute-optimal model for the Gopher budget with the rounded constants?", "a": ["30.3"]},
+ {"q": "Under which licence is the companion code of the book released?", "a": ["mit"]},
+ {"q": "Which bike-sharing system do the chapter 16 data come from?", "a": ["capital bikeshare"]},
+ {"q": "What discount factor does the chapter 19 grid world use?", "a": ["0.9"]}
+]
