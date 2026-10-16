@@ -1,7 +1,10 @@
 # Exact versions verified with Python 3.14.4 on 2026-10-16.
 # A library is added here only together with the first tested example that uses it
-# (pandas and scikit-learn with chapter 4, PyTorch with chapter 9,
-# Hugging Face transformers with chapter 12).
+# (PyTorch with chapter 9, Hugging Face transformers with chapter 12).
 numpy==2.5.4
 matplotlib==3.11.2
 pytest==9.1.1
+# From chapter 4 (data preparation):
+pandas==3.0.6
+scikit-learn==1.9.1
+scipy==1.18.1
