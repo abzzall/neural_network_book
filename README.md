@@ -75,9 +75,18 @@ explains each step.
 | 12 | Convolutional Neural Networks | [`chapter-12-cnn`](chapter-12-cnn) |
 | 13 | Recurrent Neural Networks | [`chapter-13-rnn`](chapter-13-rnn) |
 | 14 | Attention and Transformers | [`chapter-14-transformers`](chapter-14-transformers) |
-| 15 | Generative Models | [`chapter-15-generative`](chapter-15-generative) |
-| 16 | Choosing a Model in Practice | [`chapter-16-model-selection`](chapter-16-model-selection) |
-| 17 | Capstone Project | [`chapter-17-capstone`](chapter-17-capstone) |
+| 15 | Working with Text | [`chapter-15-nlp`](chapter-15-nlp) |
+| 16 | Time-Series Data | [`chapter-16-time-series`](chapter-16-time-series) |
+| 17 | Computer Vision beyond Classification | [`chapter-17-vision`](chapter-17-vision) |
+| 18 | Graph Neural Networks | [`chapter-18-gnn`](chapter-18-gnn) |
+| 19 | Deep Reinforcement Learning | [`chapter-19-rl`](chapter-19-rl) |
+| 20 | Generative Models | [`chapter-20-generative`](chapter-20-generative) |
+| 21 | Large Language Models | [`chapter-21-llm`](chapter-21-llm) |
+| 22 | Pretrained Models and Transfer Learning | [`chapter-22-pretrained`](chapter-22-pretrained) |
+| 23 | Interpretability and Fairness | [`chapter-23-interpretability`](chapter-23-interpretability) |
+| 24 | Deployment and MLOps | [`chapter-24-deployment`](chapter-24-deployment) |
+| 25 | Choosing a Model in Practice | [`chapter-25-model-selection`](chapter-25-model-selection) |
+| 26 | Capstone Project | [`chapter-26-capstone`](chapter-26-capstone) |
 
 Chapters 5–8 build networks from scratch with NumPy. From chapter 9 the book
 uses PyTorch.
@@ -85,6 +94,10 @@ uses PyTorch.
 Chapter 14 adds [attention and transformer examples](chapter-14-transformers/README.md),
 including an optional, explicitly downloaded pretrained sentiment checkpoint.
 Routine tests never download weights and report skips when that checkpoint is absent.
+
+Chapter 15 adds [text-processing examples](chapter-15-nlp/README.md). Its
+SMS Spam Collection data and pinned sentence encoder are downloaded only on
+request (`--download`); tests that need them report skips until then.
 
 Chapter 11 adds optional CUDA examples. Its [environment instructions](chapter-11-cuda/README.md)
 describe the verified GPU build, compiler prerequisites and CPU-only skip behaviour.

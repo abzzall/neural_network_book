@@ -1,4 +1,4 @@
-# Chapter 17 — Capstone Project
+# Chapter 25 — Choosing a Model in Practice
 
 The code for this chapter is in preparation. An example is added here only
 after it has been run and tested.
