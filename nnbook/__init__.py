@@ -7,9 +7,10 @@ from nnbook.layers import Dense
 from nnbook.linear import LogisticRegression, SoftmaxRegression
 from nnbook.losses import MeanSquaredError, SoftmaxCrossEntropy
 from nnbook.network import Network
+from nnbook.optimizers import SGD, AdaGrad, Adam, RMSProp
 from nnbook.perceptron import Perceptron
 
-__all__ = ["Dense", "LogisticRegression", "MeanSquaredError", "Network", "Perceptron",
+__all__ = ["AdaGrad", "Adam", "Dense", "RMSProp", "SGD", "LogisticRegression", "MeanSquaredError", "Network", "Perceptron",
            "ReLU", "Sigmoid", "SoftmaxCrossEntropy", "SoftmaxRegression", "Tanh",
            "max_relative_error", "preprocessing"]
 __version__ = "0.1.0"

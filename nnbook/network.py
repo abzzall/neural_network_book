@@ -1,6 +1,8 @@
-"""A sequence of layers trained by gradient descent (chapter 6)."""
+"""A sequence of layers trained by gradient descent (chapters 6 and 7)."""
 
 import numpy as np
+
+from nnbook.optimizers import SGD
 
 
 class Network:
@@ -27,13 +29,33 @@ class Network:
         for value, grad in self.params():
             value -= learning_rate * grad
 
-    def fit(self, X, y, learning_rate=0.1, epochs=100):
-        """Full-batch gradient descent; chapter 7 adds mini-batches and better optimisers."""
+    def fit(self, X, y, learning_rate=0.1, epochs=100, optimizer=None,
+            batch_size=None, seed=0, schedule=None):
+        """Train for a number of epochs.
+
+        With batch_size=None every step uses the whole training set (chapter 6);
+        otherwise each epoch visits the samples in a new random order, in
+        mini-batches (chapter 7). losses[k] is the training loss at the start
+        of epoch k. schedule(epoch) may set the learning rate of each epoch.
+        """
+        optimizer = optimizer or SGD(learning_rate)
+        rng = np.random.default_rng(seed)
         self.losses = []
-        for _ in range(epochs):
+        for epoch in range(epochs):
+            if schedule is not None:
+                optimizer.lr = schedule(epoch)
+            if batch_size is None:
+                self.losses.append(self.loss_value(X, y))
+                self.backward()
+                optimizer.step(self.params())
+                continue
             self.losses.append(self.loss_value(X, y))
-            self.backward()
-            self.step(learning_rate)
+            order = rng.permutation(len(X))
+            for start in range(0, len(X), batch_size):
+                batch = order[start:start + batch_size]
+                self.loss_value(X[batch], y[batch])
+                self.backward()
+                optimizer.step(self.params())
         return self
 
     def predict(self, X):
