@@ -61,3 +61,14 @@ def test_ppo_clip(tmp_path):
         '  ratio 1.0: objective -1.00, gradient -1',
         '  ratio 1.1: objective -1.10, gradient -1',
         '  ratio 1.5: objective -1.50, gradient -1']
+
+
+def test_reinforce_demo(tmp_path):
+    """Policy gradients learn the task for every seed, but not monotonically."""
+    lines = run('reinforce_demo.py', tmp_path)
+    assert len(lines) == 3
+    for line in lines:
+        assert 'solved at episode None' not in line
+        assert line.split('greedy policy ')[1].startswith('500.0')
+    lasts = [float(line.split('last 50 episodes ')[1].split(',')[0]) for line in lines]
+    assert min(lasts) < 400 < max(lasts)          # one seed has fallen back after solving

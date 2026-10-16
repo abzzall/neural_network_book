@@ -1,0 +1,94 @@
+"""INCOMPLETE exercise starter. Deep Q-network for the cart-pole task: replay buffer, target network, epsilon-greedy.
+
+Each seed trains for 100,000 environment steps; the greedy policy is scored on
+20 fresh episodes every 20,000 steps, so the evaluation shows the learning path.
+"""
+
+import json
+from pathlib import Path
+import sys
+
+import numpy as np
+import torch
+from torch import nn
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from cartpole import CartPole
+from rl_utils import evaluate
+
+STEPS, CHECK_EVERY, GAMMA, BATCH, SYNC = 100_000, 20_000, 0.99, 64, 1000
+
+
+def q_network():
+    return nn.Sequential(nn.Linear(4, 64), nn.ReLU(), nn.Linear(64, 64), nn.ReLU(),
+                         nn.Linear(64, 2))
+
+
+def epsilon(step, start=1.0, end=0.05, decay_steps=20_000):
+    """Step 1: exploration falls linearly from 1 to 0.05, then stays there."""
+    raise NotImplementedError("Step 1: complete epsilon")
+
+
+class Replay:
+    """Step 2: a ring buffer of transitions and uniform random minibatches."""
+
+    def __init__(self, size=50_000):
+        self.s, self.s2 = np.zeros((size, 4), np.float32), np.zeros((size, 4), np.float32)
+        self.a, self.r = np.zeros(size, np.int64), np.zeros(size, np.float32)
+        self.end, self.n, self.size = np.zeros(size, np.float32), 0, size
+
+    def add(self, s, a, r, s2, terminated):
+        raise NotImplementedError("Step 2: store one transition in the ring buffer")
+
+    def sample(self, rng, batch=BATCH):
+        raise NotImplementedError("Step 2: sample a uniform random minibatch")
+
+
+def td_target(target_net, r, s2, terminated):
+    """Step 3: r + gamma max_a Q_target(s2, a), with no bootstrap after termination, eq. (19.6)."""
+    raise NotImplementedError("Step 3: complete td_target")
+
+
+def train(seed, steps=STEPS, warm_up=1000, lr=5e-4):
+    torch.manual_seed(seed)
+    rng, env = np.random.default_rng(seed), CartPole(seed=seed)
+    q, target = q_network(), q_network()
+    target.load_state_dict(q.state_dict())
+    optimiser, replay = torch.optim.Adam(q.parameters(), lr=lr), Replay()
+    greedy = lambda s: int(q(torch.tensor(s, dtype=torch.float32)).argmax())
+    state, checks = env.reset(), []
+    for step in range(1, steps + 1):
+        if rng.random() < epsilon(step):
+            action = int(rng.integers(2))
+        else:
+            with torch.no_grad():
+                action = greedy(state)
+        nxt, reward, terminated, truncated = env.step(action)
+        replay.add(state, action, reward, nxt, terminated)     # a time limit is not an end
+        state = env.reset() if terminated or truncated else nxt
+        if replay.n >= warm_up:
+            s, a, r, s2, end = replay.sample(rng)
+            q_sa = q(s).gather(1, a[:, None])[:, 0]
+            loss = nn.functional.smooth_l1_loss(q_sa, td_target(target, r, s2, end))
+            optimiser.zero_grad()
+            loss.backward()
+            optimiser.step()
+        if step % SYNC == 0:                                   # Step 4: copy the weights
+            raise NotImplementedError("Step 4: copy the online weights into the target network")
+        if step % CHECK_EVERY == 0:
+            with torch.no_grad():
+                checks.append(evaluate(greedy, seed))
+    return checks
+
+
+def run(seeds=(0, 1, 2)):
+    torch.set_num_threads(1)
+    checks = np.array([train(seed) for seed in seeds])        # (seeds, checkpoints)
+    return {'final_mean': float(checks[:, -1].mean()), 'final_min': float(checks[:, -1].min()),
+            'checkpoints_at_500': int((checks == 500).sum()),
+            'worst_after_40k': float(checks[:, 1:].min()),
+            'checks': checks.tolist()}
+
+
+if __name__ == '__main__':
+    print(json.dumps(run(), indent=1))
