@@ -65,3 +65,12 @@ def test_gan_and_diffusion_cover_modes(tmp_path):
     assert diffusion[0] == 'signal kept after 100 steps: sqrt(alpha_bar) = 0.0046'
     assert all('covered 8 of 8' in line for line in diffusion[1:])
     assert all(number(line, 'mode ') > 0.8 for line in diffusion[1:])
+
+
+def test_figure_data(tmp_path):
+    out = subprocess.run([sys.executable, str(HERE / 'figure_data.py'), str(tmp_path)],
+                         capture_output=True, text=True, check=True, timeout=600).stdout
+    assert out.strip() == "modes covered: {'real': 8, 'gan': 7, 'diffusion': 8}"
+    import numpy as np
+    for name in ('real', 'gan', 'diffusion'):
+        assert np.loadtxt(tmp_path / f'{name}.dat', skiprows=1).shape == (600, 2)
