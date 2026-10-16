@@ -77,7 +77,7 @@ def train(seed, steps=STEPS, warm_up=1000, lr=5e-4):
             optimiser.zero_grad()
             loss.backward()
             optimiser.step()
-        if step % SYNC == 0:                                   # Step 4: copy the weights
+        if step % SYNC == 0:                     # Step 4: copy the weights
             target.load_state_dict(q.state_dict())
         if step % CHECK_EVERY == 0:
             with torch.no_grad():
