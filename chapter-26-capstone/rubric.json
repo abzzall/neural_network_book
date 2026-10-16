@@ -1,0 +1,9 @@
+{
+  "specification": 10,
+  "data_audit_and_split": 20,
+  "baseline": 15,
+  "model_and_evaluation": 20,
+  "error_analysis": 15,
+  "reproducibility": 15,
+  "report_and_attribution": 5
+}
