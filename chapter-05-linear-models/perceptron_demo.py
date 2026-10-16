@@ -1,4 +1,4 @@
-"""Chapter 4: train a perceptron on logical AND and on a random separable dataset."""
+"""Chapter 5: train a perceptron on logical AND and on a random separable dataset."""
 
 import numpy as np
 

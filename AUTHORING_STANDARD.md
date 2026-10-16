@@ -8,7 +8,7 @@ An example shows readers how code works. A listing that does not run, or a
 number the code does not produce, misleads the reader. Therefore:
 
 - every script has a test that runs it the way a reader would and checks its
-  output (see `chapter-04-perceptron/test_perceptron_demo.py`);
+  output (see `chapter-05-linear-models/test_perceptron_demo.py`);
 - every number printed in the book, including in worked solutions, is produced
   by running the code, never computed by hand or estimated;
 - results are deterministic: every random generator is seeded, and examples run

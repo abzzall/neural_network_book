@@ -1,4 +1,4 @@
-# Chapter 6 — Optimising the Training
+# Chapter 13 — Generative Models
 
 The code for this chapter is in preparation. An example is added here only
 after it has been run and tested.

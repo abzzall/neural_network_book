@@ -38,7 +38,7 @@ The last command ends with `All companion-code checks passed.` Run any
 chapter's script from the repository root, for example:
 
 ```bash
-.venv/bin/python chapter-04-perceptron/perceptron_demo.py
+.venv/bin/python chapter-05-linear-models/perceptron_demo.py
 ```
 
 The book's appendix on setting up the environment explains each step.
@@ -59,20 +59,22 @@ The book's appendix on setting up the environment explains each step.
 | # | Chapter | Folder |
 |---|---------|--------|
 | 1 | Introduction | [`chapter-01-introduction`](chapter-01-introduction) |
-| 2 | Mathematical Foundations | [`chapter-02-math-foundations`](chapter-02-math-foundations) |
-| 3 | Data: Requirements, Cleaning, and Preprocessing | [`chapter-03-data`](chapter-03-data) |
-| 4 | The Perceptron | [`chapter-04-perceptron`](chapter-04-perceptron) |
-| 5 | Multilayer Networks and Backpropagation | [`chapter-05-mlp-backprop`](chapter-05-mlp-backprop) |
-| 6 | Optimising the Training | [`chapter-06-optimization`](chapter-06-optimization) |
-| 7 | Regularisation and Model Evaluation | [`chapter-07-regularization`](chapter-07-regularization) |
-| 8 | From NumPy to PyTorch | [`chapter-08-pytorch`](chapter-08-pytorch) |
-| 9 | Convolutional Neural Networks | [`chapter-09-cnn`](chapter-09-cnn) |
-| 10 | Recurrent Neural Networks | [`chapter-10-rnn`](chapter-10-rnn) |
-| 11 | Attention and Transformers | [`chapter-11-transformers`](chapter-11-transformers) |
-| 12 | Generative Models | [`chapter-12-generative`](chapter-12-generative) |
-| 13 | Choosing a Model in Practice | [`chapter-13-model-selection`](chapter-13-model-selection) |
+| 2 | Linear Algebra and Calculus | [`chapter-02-linear-algebra`](chapter-02-linear-algebra) |
+| 3 | Probability, Statistics, and Information Theory | [`chapter-03-probability`](chapter-03-probability) |
+| 4 | Data: Requirements, Cleaning, and Preprocessing | [`chapter-04-data`](chapter-04-data) |
+| 5 | Linear Models and the Perceptron | [`chapter-05-linear-models`](chapter-05-linear-models) |
+| 6 | Multilayer Networks and Backpropagation | [`chapter-06-mlp-backprop`](chapter-06-mlp-backprop) |
+| 7 | Optimising the Training | [`chapter-07-optimization`](chapter-07-optimization) |
+| 8 | Regularisation and Model Evaluation | [`chapter-08-regularization`](chapter-08-regularization) |
+| 9 | From NumPy to PyTorch | [`chapter-09-pytorch`](chapter-09-pytorch) |
+| 10 | Convolutional Neural Networks | [`chapter-10-cnn`](chapter-10-cnn) |
+| 11 | Recurrent Neural Networks | [`chapter-11-rnn`](chapter-11-rnn) |
+| 12 | Attention and Transformers | [`chapter-12-transformers`](chapter-12-transformers) |
+| 13 | Generative Models | [`chapter-13-generative`](chapter-13-generative) |
+| 14 | Choosing a Model in Practice | [`chapter-14-model-selection`](chapter-14-model-selection) |
+| 15 | Capstone Project | [`chapter-15-capstone`](chapter-15-capstone) |
 
-Chapters 4–7 build networks from scratch with NumPy. From chapter 8 the book
+Chapters 5–8 build networks from scratch with NumPy. From chapter 9 the book
 uses PyTorch.
 
 ## License

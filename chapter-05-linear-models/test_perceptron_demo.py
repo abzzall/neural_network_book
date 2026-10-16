@@ -1,4 +1,4 @@
-"""Run the chapter 4 demo exactly as a reader would and check its output."""
+"""Run the chapter 5 demo exactly as a reader would and check its output."""
 
 import subprocess
 import sys

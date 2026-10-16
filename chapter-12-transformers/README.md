@@ -1,4 +1,4 @@
-# Chapter 9 — Convolutional Neural Networks
+# Chapter 12 — Attention and Transformers
 
 The code for this chapter is in preparation. An example is added here only
 after it has been run and tested.
