@@ -1,6 +1,6 @@
 # Exact versions verified with Python 3.14.4 on 2026-10-16.
 # A library is added here only together with the first tested example that uses it
-# (Hugging Face transformers with chapter 12).
+# (Hugging Face transformers with chapter 14).
 numpy==2.5.4
 matplotlib==3.11.2
 pytest==9.1.1

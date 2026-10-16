@@ -70,12 +70,14 @@ explains each step.
 | 7 | Optimising the Training | [`chapter-07-optimization`](chapter-07-optimization) |
 | 8 | Regularisation and Model Evaluation | [`chapter-08-regularization`](chapter-08-regularization) |
 | 9 | From NumPy to PyTorch | [`chapter-09-pytorch`](chapter-09-pytorch) |
-| 10 | Convolutional Neural Networks | [`chapter-10-cnn`](chapter-10-cnn) |
-| 11 | Recurrent Neural Networks | [`chapter-11-rnn`](chapter-11-rnn) |
-| 12 | Attention and Transformers | [`chapter-12-transformers`](chapter-12-transformers) |
-| 13 | Generative Models | [`chapter-13-generative`](chapter-13-generative) |
-| 14 | Choosing a Model in Practice | [`chapter-14-model-selection`](chapter-14-model-selection) |
-| 15 | Capstone Project | [`chapter-15-capstone`](chapter-15-capstone) |
+| 10 | Automatic Differentiation from Scratch | [`chapter-10-autograd`](chapter-10-autograd) |
+| 11 | GPU Computing with CUDA | [`chapter-11-cuda`](chapter-11-cuda) |
+| 12 | Convolutional Neural Networks | [`chapter-12-cnn`](chapter-12-cnn) |
+| 13 | Recurrent Neural Networks | [`chapter-13-rnn`](chapter-13-rnn) |
+| 14 | Attention and Transformers | [`chapter-14-transformers`](chapter-14-transformers) |
+| 15 | Generative Models | [`chapter-15-generative`](chapter-15-generative) |
+| 16 | Choosing a Model in Practice | [`chapter-16-model-selection`](chapter-16-model-selection) |
+| 17 | Capstone Project | [`chapter-17-capstone`](chapter-17-capstone) |
 
 Chapters 5–8 build networks from scratch with NumPy. From chapter 9 the book
 uses PyTorch.
