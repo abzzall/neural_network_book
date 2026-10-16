@@ -13,6 +13,7 @@ dependencies = ["numpy==2.5.4", "matplotlib==3.11.2"]
 
 [project.optional-dependencies]
 dev = ["pytest==9.1.1"]
+cuda = ["torch==2.14.1", "triton==3.8.0; sys_platform == 'linux' and platform_machine == 'x86_64'"]
 
 [tool.setuptools]
 packages = ["nnbook"]

@@ -1,0 +1,6 @@
+# Optional Linux NVIDIA environment, verified on 2026-10-16.
+# Install instead of the CPU-only recipe; see chapter-11-cuda/README.md.
+--extra-index-url https://download.pytorch.org/whl/cu132
+-r requirements.txt
+torch==2.14.1+cu132
+triton==3.8.0; sys_platform == 'linux' and platform_machine == 'x86_64'

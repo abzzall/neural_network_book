@@ -82,6 +82,9 @@ explains each step.
 Chapters 5–8 build networks from scratch with NumPy. From chapter 9 the book
 uses PyTorch.
 
+Chapter 11 adds optional CUDA examples. Its [environment instructions](chapter-11-cuda/README.md)
+describe the verified GPU build, compiler prerequisites and CPU-only skip behaviour.
+
 ## License
 
 Code: [MIT](LICENSE.md). The book manuscript is not included in that grant.
