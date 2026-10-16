@@ -24,9 +24,10 @@ def preferences(n, seed=0):
 
 
 def dpo_loss(logits, winners, losers):
-    """-log sigmoid(beta * [(log pi - log ref)(y_w) - (log pi - log ref)(y_l)]), eq. (21.7)."""
-    ratio = torch.log_softmax(logits, dim=0) - log_ref
-    return -torch.nn.functional.logsigmoid(BETA * (ratio[winners] - ratio[losers])).mean()
+    """DPO loss of eq. (21.7) for preference pairs (winner, loser)."""
+    ratio = torch.log_softmax(logits, dim=0) - log_ref         # log pi - log pi_ref
+    margin = BETA * (ratio[winners] - ratio[losers])
+    return -torch.nn.functional.logsigmoid(margin).mean()
 
 
 if __name__ == '__main__':
