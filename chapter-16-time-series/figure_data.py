@@ -2,7 +2,8 @@
 
 Usage: figure_data.py OUTPUT_FOLDER. Writes series.dat (daily rentals and their
 7-day mean), acf.dat (autocorrelations), and fan.dat (quantile forecast from
-the first backtest origin, 2012-07-01, with the actual values).
+the first backtest origin, 2012-07-01, with the actual values) and band.dat
+(the 10%-90% interval as a closed outline for filling).
 """
 
 from pathlib import Path
@@ -38,6 +39,9 @@ def write(folder):
     rows += [(d, y[d], *q[i]) for i, d in enumerate(future)]
     np.savetxt(folder / 'fan.dat', np.array(rows), fmt='%.6g',
                header='day actual q10 q50 q90', comments='')
+    outline = np.vstack([np.column_stack([future, q[:, 0]]),
+                         np.column_stack([future[::-1], q[::-1, 2]])])
+    np.savetxt(folder / 'band.dat', outline, fmt='%.6g', header='day value', comments='')
     return q
 
 

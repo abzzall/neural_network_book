@@ -109,3 +109,6 @@ def test_figure_data(tmp_path):
     assert acf[0, 1] == 1 and acf[1, 1] == pytest.approx(0.846, abs=1e-3)
     q = fan[28:, 2:]
     assert (q[:, 0] <= q[:, 1]).all() and (q[:, 1] <= q[:, 2]).all()
+    band = np.loadtxt(tmp_path / 'band.dat', skiprows=1)
+    assert band.shape == (28, 2)
+    assert band[0, 1] == q[0, 0] and band[-1, 1] == q[0, 2]   # q10 forward, q90 back
