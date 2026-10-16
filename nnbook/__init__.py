@@ -1,4 +1,4 @@
-"""nnbook — neural networks from scratch, companion library of the textbook «Нейронные сети»."""
+"""nnbook: neural networks from scratch, the companion library of the textbook Neural Networks."""
 
 from nnbook.perceptron import Perceptron
 

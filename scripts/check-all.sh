@@ -14,7 +14,7 @@ fi
 
 echo "==> Python: $("${python_bin}" --version)"
 echo "==> Running all tests"
-"${python_bin}" -m pytest -v
+"${python_bin}" -m pytest -v --ignore-glob="*/based-on/*"   # based-on/ fails until a reader completes it
 
 # Applied exercises: each finished solution marks itself.
 shopt -s nullglob
