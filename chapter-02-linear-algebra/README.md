@@ -6,8 +6,8 @@ repository root.
 | File | Book | What it shows |
 |---|---|---|
 | `layer.py` | Listing 2.1 | A layer of two neurons as a matrix–vector product, for one sample and for a batch |
-| `chain_rule.py` | Listing 2.2 | Forward and backward values on the graph of one squared error |
-| `numerical_gradient.py` | Listing 2.3 | A central-difference gradient checked against the formula for a quadratic form |
+| `numerical_gradient.py` | Listing 2.2 | A central-difference gradient checked against the formula for a quadratic form |
+| `chain_rule.py` | Listing 2.3 | Forward and backward values on the graph of one squared error |
 | `two_steps.py` | Worked example | Two gradient-descent steps for a line through three points, and the exact solution |
 | `gd_paths.py` | Figure data | Gradient descent on an elongated bowl at three learning rates |
 | `test_scripts.py` | — | Runs every script and checks every printed line |
