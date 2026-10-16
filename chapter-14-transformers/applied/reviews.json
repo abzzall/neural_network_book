@@ -1,0 +1,27 @@
+{
+  "licence": "Original examples released under the repository MIT licence.",
+  "calibration": [
+    ["A delightful film with a warm and satisfying ending.", 1],
+    ["The cast gives a moving performance in a beautiful story.", 1],
+    ["I enjoyed the clever dialogue and the lively characters.", 1],
+    ["Despite a slow opening, this is an excellent film.", 1],
+    ["A boring film with a confused plot and wooden acting.", 0],
+    ["The ending is dreadful and the dialogue is painful.", 0],
+    ["I regret spending an evening on this tedious story.", 0],
+    ["Despite a promising opening, the film becomes a disappointment.", 0]
+  ],
+  "test": [
+    ["The story was simple, but I loved every minute.", 1],
+    ["A thoughtful and rewarding film that deserves another viewing.", 1],
+    ["I expected a disaster, but the film was wonderful.", 1],
+    ["The photography is beautiful and the ending feels earned.", 1],
+    ["Not a bad film at all; I would happily watch it again.", 1],
+    ["This is exactly the sort of joyful comedy I hoped for.", 1],
+    ["An impressive cast cannot rescue this empty story.", 0],
+    ["I expected a masterpiece, but the result was awful.", 0],
+    ["The first scene works, but everything after it disappoints.", 0],
+    ["A forgettable film that mistakes noise for excitement.", 0],
+    ["The film is not worth recommending to anyone.", 0],
+    ["Wonderful: another two hours wasted on a predictable sequel.", 0]
+  ]
+}

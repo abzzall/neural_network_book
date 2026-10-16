@@ -10,3 +10,8 @@ scikit-learn==1.9.1
 scipy==1.18.1
 # From chapter 9 (verified with the CPU build 2.14.1+cpu, see README):
 torch==2.14.1
+# From chapter 14 (pretrained text models, CPU inference verified):
+transformers==5.20.1
+huggingface-hub==2.2.0
+tokenizers==0.23.3
+safetensors==0.8.0

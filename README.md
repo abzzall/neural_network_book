@@ -82,6 +82,10 @@ explains each step.
 Chapters 5–8 build networks from scratch with NumPy. From chapter 9 the book
 uses PyTorch.
 
+Chapter 14 adds [attention and transformer examples](chapter-14-transformers/README.md),
+including an optional, explicitly downloaded pretrained sentiment checkpoint.
+Routine tests never download weights and report skips when that checkpoint is absent.
+
 Chapter 11 adds optional CUDA examples. Its [environment instructions](chapter-11-cuda/README.md)
 describe the verified GPU build, compiler prerequisites and CPU-only skip behaviour.
 
