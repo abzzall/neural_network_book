@@ -48,7 +48,7 @@ class Replay:
 
 
 def td_target(target_net, r, s2, terminated):
-    """Step 3: r + gamma max_a Q_target(s2, a), with no bootstrap after termination, eq. (19.6)."""
+    """Step 3: the TD target of eq. (19.6); no bootstrap after termination."""
     with torch.no_grad():
         return r + GAMMA * (1 - terminated) * target_net(s2).max(dim=1).values
 
@@ -68,7 +68,7 @@ def train(seed, steps=STEPS, warm_up=1000, lr=5e-4):
             with torch.no_grad():
                 action = greedy(state)
         nxt, reward, terminated, truncated = env.step(action)
-        replay.add(state, action, reward, nxt, terminated)     # a time limit is not an end
+        replay.add(state, action, reward, nxt, terminated)   # not truncated
         state = env.reset() if terminated or truncated else nxt
         if replay.n >= warm_up:
             s, a, r, s2, end = replay.sample(rng)
