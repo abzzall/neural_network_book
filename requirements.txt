@@ -1,5 +1,7 @@
-numpy>=1.26
-matplotlib>=3.8
-pytest>=8.0
-# From chapter 7 on:
-# torch>=2.4
+# Exact versions verified with Python 3.14.4 on 2026-10-16.
+# A library is added here only together with the first tested example that uses it
+# (pandas and scikit-learn with chapter 3, PyTorch with chapter 8,
+# Hugging Face transformers with chapter 11).
+numpy==2.5.4
+matplotlib==3.11.2
+pytest==9.1.1

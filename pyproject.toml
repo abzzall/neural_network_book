@@ -5,22 +5,20 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "nnbook"
 version = "0.1.0"
-description = "Companion code for the textbook «Нейронные сети»"
+description = "Companion code for the textbook Neural Networks"
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.11"
-dependencies = ["numpy>=1.26", "matplotlib>=3.8"]
+requires-python = ">=3.12"
+dependencies = ["numpy==2.5.4", "matplotlib==3.11.2"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "ruff"]
-torch = ["torch>=2.4"]
+dev = ["pytest==9.1.1"]
 
 [tool.setuptools]
 packages = ["nnbook"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+# Library tests live in tests/; each chapter keeps its tests beside its code.
+testpaths = ["tests", "chapter-*"]
+addopts = "--import-mode=importlib"
 pythonpath = ["."]
-
-[tool.ruff]
-line-length = 100

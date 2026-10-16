@@ -1,4 +1,4 @@
-"""Rosenblatt perceptron (chapter 3)."""
+"""Rosenblatt perceptron (chapter 4)."""
 
 import numpy as np
 
