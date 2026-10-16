@@ -29,7 +29,7 @@ Linux, 2026-10-16:
 git clone https://github.com/abzzall/neural_network_book.git
 cd neural_network_book
 uv venv .venv
-uv pip install -p .venv -r requirements.txt
+uv pip install -p .venv -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
 uv pip install -p .venv -e .       # makes `import nnbook` work everywhere
 ./scripts/check-all.sh             # runs every test
 ```
@@ -41,7 +41,10 @@ chapter's script from the repository root, for example:
 .venv/bin/python chapter-05-linear-models/perceptron_demo.py
 ```
 
-The book's appendix on setting up the environment explains each step.
+The extra index installs the CPU-only build of PyTorch, which is all the examples
+need and much smaller than the default build; without it the default build of the
+same version is installed. The book's appendix on setting up the environment
+explains each step.
 
 ## Structure
 
