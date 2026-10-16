@@ -113,3 +113,55 @@ def test_constant_multiplier_does_not_save_input(load_script):
     x.detach().add_(1)
     y.backward()
     assert x.grad == 3
+
+
+@pytest.mark.parametrize('backend', ['tiny', 'torch'])
+def test_saved_relu_and_constant_multiplier(load_script, backend):
+    m = load_script('tiny_tensor') if backend == 'tiny' else torch
+    make = (lambda v: m.Tensor(v, True)) if backend == 'tiny' else (
+        lambda v: torch.tensor(v, dtype=torch.double, requires_grad=True))
+    array = (lambda t: t.grad) if backend == 'tiny' else (lambda t: t.grad.numpy())
+    x = make([-1., 2.])
+    y = m.relu(x)
+    x.detach().add_(5)
+    y.sum().backward()
+    np.testing.assert_array_equal(array(x), [0., 1.])
+    y = m.relu(x)
+    y.detach().add_(1)
+    with pytest.raises(RuntimeError, match='inplace operation'):
+        y.sum().backward()
+    x = make(2.)
+    y = x * 3
+    x.detach().add_(1)
+    y.backward()
+    assert array(x) == 3
+    x = make(2.)
+    with m.no_grad():
+        x.add_(1)
+    (x * x).backward()
+    assert array(x) == 6
+
+
+def test_pytorch_modes_and_independent_copy():
+    x = torch.tensor([2., 3.], requires_grad=True)
+    independent = x.detach().clone()
+    independent.add_(1)
+    torch.testing.assert_close(x, torch.tensor([2., 3.]))
+    with torch.no_grad():
+        frozen = x * x
+    y = torch.tensor([1., 1.], requires_grad=True)
+    (frozen * y).sum().backward()
+    torch.testing.assert_close(y.grad, frozen)
+    with torch.inference_mode():
+        inference = x * x
+    assert not inference.requires_grad and inference.is_inference()
+    with pytest.raises(RuntimeError, match='Inference tensors cannot be saved'):
+        inference * y
+
+
+def test_shared_scalar_graph(load_script):
+    x = load_script('value').Value(2.)
+    u = x * x
+    loss = u + x
+    loss.backward()
+    assert (u.data, loss.data, u.grad, x.grad) == (4., 6., 1., 5.)
