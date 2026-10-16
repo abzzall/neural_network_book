@@ -29,8 +29,16 @@ def test_first_adam_step_has_size_lr():
     assert math.isclose(one_step(Adam(lr=0.01), 1.0, 123.0), 0.99, rel_tol=1e-6)
 
 
-def test_adamw_decays_weights_even_with_zero_gradient():
-    assert math.isclose(one_step(Adam(lr=0.1, weight_decay=0.5), 2.0, 0.0), 2.0 - 0.1 * 0.5 * 2.0)
+def test_adamw_decays_weight_matrices_even_with_zero_gradient():
+    W, b = np.full((1, 1), 2.0), np.array([2.0])
+    Adam(lr=0.1, weight_decay=0.5).step([(W, np.zeros((1, 1))), (b, np.zeros(1))])
+    assert math.isclose(W[0, 0], 2.0 - 0.1 * 0.5 * 2.0) and b[0] == 2.0
+
+
+def test_sgd_weight_decay_is_an_l2_penalty_on_weights():
+    W, b = np.full((1, 1), 2.0), np.array([2.0])
+    SGD(lr=0.1, weight_decay=0.5).step([(W, np.zeros((1, 1))), (b, np.zeros(1))])
+    assert math.isclose(W[0, 0], 2.0 - 0.1 * 0.5 * 2.0) and b[0] == 2.0
 
 
 def test_adagrad_and_rmsprop_first_steps():

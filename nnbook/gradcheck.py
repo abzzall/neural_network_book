@@ -18,6 +18,8 @@ def max_relative_error(net, X, y, h=1e-6):
             down = net.loss_value(X, y)
             value[idx] = old
             numeric = (up - down) / (2 * h)
-            denom = max(abs(numeric) + abs(analytic[idx]), 1e-12)
+            # Gradients below 1e-8 count as zero, so that two rounding errors around
+            # an exactly-zero gradient do not look like a large relative error.
+            denom = max(abs(numeric) + abs(analytic[idx]), 1e-8)
             worst = max(worst, abs(numeric - analytic[idx]) / denom)
     return worst

@@ -13,11 +13,13 @@ import numpy as np
 class SGD:
     """theta <- theta - lr * g. With momentum, a velocity accumulates past gradients."""
 
-    def __init__(self, lr=0.1, momentum=0.0, nesterov=False):
+    def __init__(self, lr=0.1, momentum=0.0, nesterov=False, weight_decay=0.0):
         self.lr, self.momentum, self.nesterov = lr, momentum, nesterov
-        self.velocity = None
+        self.weight_decay, self.velocity = weight_decay, None
 
     def step(self, params):
+        if self.weight_decay:      # L2 penalty on weight matrices (chapter 8)
+            params = [(v, g + self.weight_decay * v if v.ndim > 1 else g) for v, g in params]
         if self.momentum == 0.0:
             for value, grad in params:
                 value -= self.lr * grad
@@ -62,8 +64,8 @@ class RMSProp:
 class Adam:
     """Running averages of the gradient (m) and its square (v), bias-corrected.
 
-    weight_decay > 0 gives AdamW: the decay is applied to the weights directly,
-    not added to the gradient.
+    weight_decay > 0 gives AdamW: the decay is applied to the weight matrices
+    directly, not added to the gradient; biases are not decayed.
     """
 
     def __init__(self, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8, weight_decay=0.0):
@@ -82,7 +84,7 @@ class Adam:
             v += (1 - self.beta2) * grad ** 2
             m_hat = m / (1 - self.beta1 ** self.t)
             v_hat = v / (1 - self.beta2 ** self.t)
-            if self.weight_decay:
+            if self.weight_decay and value.ndim > 1:      # decay weight matrices only
                 value -= self.lr * self.weight_decay * value
             value -= self.lr * m_hat / (np.sqrt(v_hat) + self.eps)
 
