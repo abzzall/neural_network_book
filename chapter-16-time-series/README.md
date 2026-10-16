@@ -33,7 +33,7 @@ origins: 25, horizon: 14 days
 naive           MAE  1385.8  MASE 1.585
 seasonal naive  MAE  1114.6  MASE 1.272
 7-day mean      MAE  1055.4  MASE 1.205
-Holt-Winters    MAE  1055.7  MASE 1.204
+Holt-Winters    MAE  1055.9  MASE 1.204
 ```
 
 The TCN reaches mean MASE 1.082 over seeds 42, 43 and 44 (standard deviation

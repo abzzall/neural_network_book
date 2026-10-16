@@ -27,8 +27,8 @@ def holt_winters_states(y, alpha, beta, gamma, m=7):
         s = season[:, t % m]
         sse += (y[t] - (level + trend + s)) ** 2         # one-step-ahead error
         new_level = alpha * (y[t] - s) + (1 - alpha) * (level + trend)
-        trend = beta * (new_level - level) + (1 - beta) * trend
         season[:, t % m] = gamma * (y[t] - level - trend) + (1 - gamma) * s
+        trend = beta * (new_level - level) + (1 - beta) * trend
         level = new_level
     return level, trend, season, sse
 

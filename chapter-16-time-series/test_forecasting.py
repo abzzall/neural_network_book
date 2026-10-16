@@ -77,3 +77,22 @@ def test_tcn_is_causal_and_sees_its_receptive_field(load_script):
     assert seen.max() == 80                                   # never a later input
     assert seen.min() >= 80 - 63 + 1                          # within the field
     assert first.shape == (1, 16, 100)
+
+
+def test_holt_winters_one_step_matches_equations(load_script):
+    m = load_script('baselines')
+    y = np.array([10., 12, 14, 11, 13, 15, 18], float)       # m = 3: one update at t = 6
+    y = y[:7]
+    a, b, g = 0.5, 0.2, 0.3
+    level0, trend0 = y[:3].mean(), (y[3:6].mean() - y[:3].mean()) / 3
+    season = list(y[:3] - y[:3].mean())
+    level, trend = level0, trend0
+    for t in range(3, 7):
+        s = season[t % 3]
+        new_level = a * (y[t] - s) + (1 - a) * (level + trend)
+        season[t % 3] = g * (y[t] - level - trend) + (1 - g) * s     # uses l_{t-1}, b_{t-1}
+        trend = b * (new_level - level) + (1 - b) * trend
+        level = new_level
+    got_level, got_trend, got_season, _ = m.holt_winters_states(y, a, b, g, m=3)
+    assert got_level[0] == pytest.approx(level) and got_trend[0] == pytest.approx(trend)
+    np.testing.assert_allclose(got_season[0], season)

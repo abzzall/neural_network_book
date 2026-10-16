@@ -59,7 +59,7 @@ def test_baselines_linear_and_strategies(tmp_path):
         'naive           MAE  1385.8  MASE 1.585',
         'seasonal naive  MAE  1114.6  MASE 1.272',
         '7-day mean      MAE  1055.4  MASE 1.205',
-        'Holt-Winters    MAE  1055.7  MASE 1.204']
+        'Holt-Winters    MAE  1055.9  MASE 1.204']
     assert run('linear_direct.py', tmp_path) == [
         'linear, past values only MAE  1010.0  MASE 1.154',
         'linear, with calendar    MAE   974.0  MASE 1.114']
@@ -94,3 +94,18 @@ def test_pretrained_forecast(tmp_path):
     lines = [line for line in lines if not line.startswith('Loading')]
     assert float(lines[0].split('MASE ')[1]) == pytest.approx(1.135, abs=0.02)
     assert float(lines[1].split(': ')[1]) == pytest.approx(0.757, abs=0.03)
+
+
+@needs_data
+def test_figure_data(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'figure_data.py'), str(tmp_path)],
+                           capture_output=True, text=True, check=True, timeout=120).stdout
+    assert lines.startswith('first origin, day 1 quantiles: ')
+    import numpy as np
+    series = np.loadtxt(tmp_path / 'series.dat', skiprows=1)
+    acf = np.loadtxt(tmp_path / 'acf.dat', skiprows=1)
+    fan = np.loadtxt(tmp_path / 'fan.dat', skiprows=1)
+    assert series.shape == (731, 3) and acf.shape == (29, 3) and fan.shape == (42, 5)
+    assert acf[0, 1] == 1 and acf[1, 1] == pytest.approx(0.846, abs=1e-3)
+    q = fan[28:, 2:]
+    assert (q[:, 0] <= q[:, 1]).all() and (q[:, 1] <= q[:, 2]).all()
