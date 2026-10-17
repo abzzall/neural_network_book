@@ -45,7 +45,7 @@ The TCN reaches mean MASE 1.082 over seeds 42, 43 and 44 (standard deviation
 and a one-time download of the model:
 
 ```bash
-uv pip install -p .venv -r requirements-chronos.txt --extra-index-url https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match
+uv pip install -p .venv -r requirements-chronos.txt
 .venv/bin/python chapter-16-time-series/pretrained_forecast.py --download
 ```
 

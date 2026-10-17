@@ -43,10 +43,13 @@ Synthetic images, masks and vectors are original and covered by this repository'
 
 ## Optional pretrained interface
 
-Install the chapter's exact optional pin into an appropriate environment:
+Install the chapter's exact optional pin from the PyTorch index that matches the
+installed torch build (`cpu`, or `cu132` for the CUDA build of chapter 11); the
+PyPI wheel of torchvision fails to import with the CPU build of torch
+(`operator torchvision::nms does not exist`):
 
 ```bash
-uv pip install -p .venv -r chapter-17-vision/requirements.txt
+uv pip install -p .venv -r chapter-17-vision/requirements.txt --index-url https://download.pytorch.org/whl/cpu
 .venv/bin/python chapter-17-vision/pretrained_detector.py --download
 .venv/bin/python chapter-17-vision/pretrained_detector.py
 ```

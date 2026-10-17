@@ -23,16 +23,23 @@ run and tested before it is published.
 ## Quick start
 
 Verified with Python 3.14.4 and [uv](https://docs.astral.sh/uv/) 0.12.10 on
-Linux, 2026-10-16:
+Linux, 2026-10-17, in a fresh clone:
 
 ```bash
 git clone https://github.com/abzzall/neural_network_book.git
 cd neural_network_book
 uv venv .venv
-uv pip install -p .venv -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
+uv pip install -p .venv torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+uv pip install -p .venv -r requirements.txt
 uv pip install -p .venv -e .       # makes `import nnbook` work everywhere
 ./scripts/check-all.sh             # runs every test
 ```
+
+PyTorch's CPU build comes from its own index, everything else from PyPI; the
+second install keeps `torch 2.14.1+cpu`. Do not merge the two installs into one
+command with `--extra-index-url`: the PyTorch index also hosts `numpy`, but not
+2.5.4, and uv then reports the requirements as unsatisfiable. Appendix B of the
+book explains the setup step by step, including plain `pip`.
 
 The last command ends with `All companion-code checks passed.` Run any
 chapter's script from the repository root, for example:

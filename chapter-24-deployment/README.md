@@ -35,7 +35,7 @@ layer: 262144 bytes -> 65536 bytes, max error 0.00181 (half a step: 0.00181)
 onnxscript and FastAPI: MIT; httpx: BSD-3-Clause):
 
 ```bash
-uv pip install -p .venv -r requirements-deployment.txt --extra-index-url https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match
+uv pip install -p .venv -r requirements-deployment.txt
 .venv/bin/python chapter-24-deployment/export_onnx.py
 ```
 

@@ -13,7 +13,11 @@ build instead of its CPU build, run from the repository root:
 
 ```bash
 uv pip install -p .venv -r requirements-cuda.txt
+uv pip install -p .venv -r requirements.txt
 ```
+
+The first command takes PyTorch and Triton from PyTorch's CUDA index; the second
+installs everything else from PyPI and keeps `torch 2.14.1+cu132`.
 
 A compatible NVIDIA driver is required. The wheel supplies its CUDA runtime;
 `nvidia-smi`'s CUDA version describes driver support, not an installed compiler.
