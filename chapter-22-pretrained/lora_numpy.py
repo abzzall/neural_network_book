@@ -19,7 +19,8 @@ if __name__ == '__main__':
     print(f'LoRA rank {r}: {A.size + B.size} trainable weights '
           f'({100 * (A.size + B.size) / W.size:.2f}% of full)')
     x = rng.normal(size=(5, d_in))
-    print('output unchanged at the start:', np.allclose(lora_forward(x, W, A, B, alpha), x @ W.T))
+    start = lora_forward(x, W, A, B, alpha)
+    print('output unchanged at the start:', np.allclose(start, x @ W.T))
     B = rng.normal(0, 0.01, (d_out, r))                  # pretend training changed B
     merged = W + (alpha / r) * B @ A                     # fold the update into W
     print('merged layer gives the same output:',
