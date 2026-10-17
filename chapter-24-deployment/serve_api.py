@@ -18,7 +18,7 @@ session = None
 
 class Image(BaseModel):
     pixels: list[float] = Field(min_length=64, max_length=64,
-                                description='8x8 grey values, row by row, scaled to 0..1')
+                                description='8x8 grey values, row by row, in 0..1')
 
 
 @app.get('/health')

@@ -4,11 +4,12 @@ import numpy as np
 
 
 def quantise(x, qmin=-128, qmax=127):
-    """q = clamp(round(x / s) + z), with s and z mapping [min, max] onto [qmin, qmax], eq. (24.1)."""
+    """q = clamp(round(x / s) + z): [min, max] onto [qmin, qmax], eq. (24.1)."""
     lo, hi = min(float(np.min(x)), 0.0), max(float(np.max(x)), 0.0)  # keep 0 exact
     scale = (hi - lo) / (qmax - qmin)
     zero_point = int(round(qmin - lo / scale))
-    q = np.clip(np.round(np.asarray(x) / scale) + zero_point, qmin, qmax).astype(np.int8)
+    q = np.clip(np.round(np.asarray(x) / scale) + zero_point, qmin, qmax)
+    q = q.astype(np.int8)
     return q, scale, zero_point
 
 
