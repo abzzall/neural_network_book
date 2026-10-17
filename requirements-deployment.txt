@@ -1,0 +1,8 @@
+# Optional: the export and serving examples of chapter 24, verified on 2026-10-17
+# with the CPU build of PyTorch. See chapter-24-deployment/README.md.
+-r requirements.txt
+onnx==1.23.2
+onnxruntime==1.31.0
+onnxscript==0.7.2
+fastapi==0.143.3
+httpx==0.28.1
