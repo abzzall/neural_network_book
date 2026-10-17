@@ -111,8 +111,10 @@ and none stored in this repository:
 | 23, 25 | UCI German Credit data | none |
 | 24 | none | `requirements-deployment.txt` |
 
-Every model and data set is permissively licensed (MIT, Apache-2.0, BSD or
-CC BY 4.0, or free use with citation as stated in each chapter README).
+Each chapter README states the licence or terms of its data and weights. Most
+are MIT, Apache-2.0, BSD or CC BY 4.0; the SMS Spam Collection is free to use
+with a citation request, and the TorchVision weights of chapter 17 come with
+the separate terms of their training data, as that README explains.
 
 Chapter 11 adds optional CUDA examples. Its [environment instructions](chapter-11-cuda/README.md)
 describe the verified GPU build, compiler prerequisites and CPU-only skip behaviour.
