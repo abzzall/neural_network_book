@@ -9,6 +9,7 @@ repository root.
 | `shapley_exact.py` | Exact Shapley values by enumerating coalitions; worked example and axioms |
 | `credit_data.py`, `credit_model.py` | German Credit data (hash-checked download) and a logistic-regression model |
 | `permutation_importance.py` | Permutation importance from scratch against scikit-learn |
+| `proxy_check.py` | How well the other features reveal whether an applicant is young |
 | `integrated_gradients.py` | Saliency and integrated gradients on a digit classifier: completeness and a sanity check |
 | `applied/` | A fairness audit with two mitigations |
 

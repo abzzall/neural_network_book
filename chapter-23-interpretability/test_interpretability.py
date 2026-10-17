@@ -73,3 +73,11 @@ def test_data_and_permutation_importance(tmp_path):
     assert lines[0] == 'test AUC: 0.8263'
     assert lines[2].split()[0] == 'checking'
     assert float(lines[-1].split(': ')[1]) < 0.02
+
+
+@pytest.mark.skipif(not DATA, reason='run credit_data.py --download first')
+def test_proxy_check(tmp_path):
+    lines = run('proxy_check.py', tmp_path)
+    assert lines[0] == 'AUC for predicting the young group from the other 19 features: 0.804'
+    assert [line.split(':')[0].strip() for line in lines[1:]] == [
+        'housing', 'status_sex', 'dependants']
