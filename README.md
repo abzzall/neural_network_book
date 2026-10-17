@@ -99,6 +99,21 @@ Chapter 15 adds [text-processing examples](chapter-15-nlp/README.md). Its
 SMS Spam Collection data and pinned sentence encoder are downloaded only on
 request (`--download`); tests that need them report skips until then.
 
+Downloads and optional packages of later chapters, all requested explicitly
+and none stored in this repository:
+
+| Chapter | Download (`--download`) | Optional requirements file |
+|---|---|---|
+| 16 | UCI Bike Sharing data; Chronos-Bolt tiny | `requirements-chronos.txt` |
+| 17 | TorchVision SSDLite weights | `chapter-17-vision/requirements.txt` |
+| 21 | GPT-2, Qwen2.5-0.5B-Instruct | none |
+| 22 | LAION CLIP ViT-B/32 (and the chapter 15 data and encoder) | none |
+| 23, 25 | UCI German Credit data | none |
+| 24 | none | `requirements-deployment.txt` |
+
+Every model and data set is permissively licensed (MIT, Apache-2.0, BSD or
+CC BY 4.0, or free use with citation as stated in each chapter README).
+
 Chapter 11 adds optional CUDA examples. Its [environment instructions](chapter-11-cuda/README.md)
 describe the verified GPU build, compiler prerequisites and CPU-only skip behaviour.
 
