@@ -12,6 +12,7 @@ the data helpers of chapter 12 and is cached in `outputs/` on first use.
 | `export_onnx.py` | Optional: ONNX export, ONNX Runtime check, int8 quantisation, batching |
 | `serve_api.py` | Optional: a FastAPI prediction service with input validation |
 | `applied/` | Drift monitoring with PSI and the Kolmogorov-Smirnov statistic |
+| `fgsm_picture.py` | Figure data | One digit before and after an FGSM attack, and the change |
 
 ```bash
 .venv/bin/python chapter-24-deployment/quantize_numpy.py

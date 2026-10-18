@@ -50,3 +50,15 @@ def test_transfer_demo_shows_that_transfer_did_not_help_here():
     # Transfer did not help here: neither transferred variant beats training from
     # scratch by more than the spread between seeds (about 0.03).
     assert max(means["frozen features"], means["fine-tuned"]) <= means["from scratch"] + 0.03
+
+
+def test_feature_maps(tmp_path):
+    out = subprocess.run([sys.executable, "feature_maps.py", str(tmp_path)], cwd=HERE,
+                         capture_output=True, text=True, check=True).stdout.splitlines()
+    # PyTorch training is not bit-identical across machines: the printed values are
+    # those of the book's machine (0.9822; maps [15, 2, 9, 12]; 5 of 16 zero).
+    assert abs(float(out[0].split("=")[1]) - 0.9822) < 0.01
+    assert out[1] == "first test digit: label 1, predicted 1"
+    assert out[2].startswith("feature maps with the largest total response: [")
+    assert out[3].startswith("maps that are zero everywhere: ")
+    assert len(list(tmp_path.glob("*.dat"))) == 9

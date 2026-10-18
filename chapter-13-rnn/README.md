@@ -12,6 +12,7 @@ Run commands from the repository root.
 | `gates_demo.py` | LSTM and PyTorch-style GRU gate equations against library cells |
 | `char_rnn.py` | A small next-character model, trained on an author-written toy corpus |
 | `applied/` | Rolling one-step GRU forecasts compared with a seven-day seasonal baseline |
+| `forecast_picture.py` | Figure data | The seasonal-correction GRU against the data over the validation and test steps |
 
 ```bash
 .venv/bin/python chapter-13-rnn/bptt_demo.py

@@ -9,8 +9,8 @@ import pytest
 HERE = Path(__file__).resolve().parent
 
 
-def run(script, cwd):
-    result = subprocess.run([sys.executable, str(HERE / script)], cwd=cwd,
+def run(script, cwd, *args):
+    result = subprocess.run([sys.executable, str(HERE / script), *args], cwd=cwd,
                             capture_output=True, text=True, check=True, timeout=600)
     return result.stdout.splitlines()
 
@@ -74,3 +74,12 @@ def test_figure_data(tmp_path):
     import numpy as np
     for name in ('real', 'gan', 'diffusion'):
         assert np.loadtxt(tmp_path / f'{name}.dat', skiprows=1).shape == (600, 2)
+
+
+def test_vae_samples(tmp_path):
+    lines = run('vae_samples.py', tmp_path, str(tmp_path))
+    assert lines[0].startswith('latent 2: the classifier reads the 30 samples as ')
+    assert lines[1].startswith('latent 8: the classifier reads the 30 samples as ')
+    assert '1' not in lines[0].split(' as ')[1]                  # the missing digit of seed 0
+    assert len(set(lines[1].split(' as ')[1])) >= 8              # the larger model varies more
+    assert len(list(tmp_path.glob('vae_samples_latent*.dat'))) == 2

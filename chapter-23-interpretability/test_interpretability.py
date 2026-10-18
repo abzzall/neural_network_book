@@ -81,3 +81,15 @@ def test_proxy_check(tmp_path):
     assert lines[0] == 'AUC for predicting the young group from the other 19 features: 0.804'
     assert [line.split(':')[0].strip() for line in lines[1:]] == [
         'housing', 'status_sex', 'dependants']
+
+
+def test_attribution_maps(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'attribution_maps.py'), str(tmp_path)],
+                           cwd=tmp_path, capture_output=True, text=True, check=True,
+                           timeout=600).stdout.splitlines()
+    assert [line.split(', positive')[0] for line in lines] == [
+        'test image 0: label 2, predicted 2', 'test image 1: label 8, predicted 8',
+        'test image 2: label 2, predicted 2']
+    shares = [float(line.rsplit(' ', 1)[1]) for line in lines]
+    assert shares == pytest.approx([0.770, 0.617, 0.818], abs=0.02)
+    assert len(list(tmp_path.glob('*.dat'))) == 12

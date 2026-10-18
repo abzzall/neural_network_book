@@ -66,6 +66,7 @@ Expected checks on CUDA:
 | `compile_demo.py` | 257 compiled values and gradients checked |
 | `triton_add.py` | 1003 outputs exactly matching PyTorch |
 | `profile_demo.py` | Operator table, matrix multiplication recorded, finite output |
+| `size_sweep.py` | Table | CPU against GPU for matrix products of growing size, with and without copies |
 
 Times depend on clocks, contention, dispatch and hardware; the tests impose
 no speedup requirement. Compilation has a first-call cost and requires its

@@ -58,3 +58,14 @@ def test_character_model(tmp_path):
     sample = lines[2].split(': ')[1]
     assert len(sample) == 48 and sample.startswith('r')
     assert set(sample) <= set('rain falls. sun shines. wind blows. ')
+
+
+def test_forecast_picture(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'forecast_picture.py'), str(tmp_path)],
+                           cwd=tmp_path, capture_output=True, text=True, check=True,
+                           timeout=600).stdout.splitlines()
+    assert lines[0].startswith('validation: seasonal MAE 1.7625, GRU MAE (seed 42) ')
+    assert lines[1].startswith('test: seasonal MAE 1.6962, GRU MAE (seed 42) ')
+    for line in lines:
+        assert float(line.rsplit(' ', 1)[1]) < float(line.split('MAE ')[1].split(',')[0])
+    assert (tmp_path / 'forecast.dat').is_file()

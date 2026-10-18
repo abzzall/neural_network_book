@@ -30,9 +30,11 @@ def test_original_dataset_is_disjoint():
     path = Path(__file__).resolve().parents[1] / 'reviews.json'
     data = json.loads(path.read_text())
     calibration, test = data['calibration'], data['test']
-    assert len(calibration) == 8 and len(test) == 12
-    assert not ({text for text, _ in calibration} & {text for text, _ in test})
-    assert {label for _, label in calibration + test} == {0, 1}
+    shift = data['shift']
+    assert len(calibration) == 8 and len(test) == 12 and len(shift) == 12
+    texts = [{text for text, _ in part} for part in (calibration, test, shift)]
+    assert not (texts[0] & texts[1] or texts[0] & texts[2] or texts[1] & texts[2])
+    assert {label for _, label in calibration + test + shift} == {0, 1}
 
 
 @pytest.mark.skipif(not (CACHE / 'model.safetensors').is_file(), reason='download pinned model first')
@@ -42,3 +44,5 @@ def test_pretrained_experiment():
     for name in ('calibration_accuracy', 'test_accuracy_before', 'test_accuracy_after'):
         assert 0 <= results[name] <= 1
     assert len(results['test_errors']) == round((1 - results['test_accuracy_after']) * 12)
+    assert len(results['shift_errors']) == round((1 - results['shift_accuracy']) * 12)
+    assert len(results['shift_error_scores']) == len(results['shift_errors'])

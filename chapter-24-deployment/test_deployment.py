@@ -53,3 +53,17 @@ def test_export_matches_pytorch(tmp_path):
     assert lines[1].split('accuracy ')[1].startswith(accuracy)
     assert float(lines[1].split('difference| ')[1]) < 1e-4
     assert int(lines[2].split(': ')[1].split()[0]) < int(lines[1].split(': ')[1].split()[0])
+
+
+def test_fgsm_picture(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'fgsm_picture.py'), str(tmp_path)],
+                           cwd=tmp_path, capture_output=True, text=True, check=True,
+                           timeout=600).stdout.splitlines()
+    assert lines[0].startswith('test digit ') and ' after the attack' in lines[0]
+    label, before, after = (int(w) for w in
+                            [lines[0].split('label ')[1].split(',')[0],
+                             lines[0].split('predicted ')[1].split()[0],
+                             lines[0].split(', ')[2].split()[0]])
+    assert label == before != after
+    assert lines[1] == 'largest pixel change 0.10 of a range of 1'
+    assert len(list(tmp_path.glob('*.dat'))) == 3

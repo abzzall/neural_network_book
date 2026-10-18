@@ -15,6 +15,7 @@ TorchVision dependency; the rest use dependencies introduced earlier.
 | `tiny_vit.py`, `vit_digits.py` | Sixteen patches plus class token; digit classification |
 | `contrastive_toy.py` | Symmetric contrastive learning on noisy synthetic vectors |
 | `pretrained_detector.py` | Optional cached SSDLite interface check |
+| `segment_picture.py` | Figure data | Test images, true masks, and the masks of the U-Net and of the intensity threshold |
 
 ```bash
 .venv/bin/python chapter-17-vision/detection_demo.py

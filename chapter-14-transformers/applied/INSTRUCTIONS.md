@@ -17,8 +17,9 @@ there. Original review sentences are supplied under the repository MIT licence.
 
 ## Files supplied
 
-- `reviews.json`: eight selection sentences and twelve distinct test sentences,
-  with author-intended labels (1 positive, 0 negative).
+- `reviews.json`: eight selection sentences, twelve distinct film-review test
+  sentences, and twelve product and service reviews (`shift`), written before
+  any of them was scored, with author-intended labels (1 positive, 0 negative).
 - `based-on/sentiment_probe.py`: model loading, score extraction and experiment
   order supplied; threshold selection, accuracy and error reporting incomplete.
 - `based-on/test_sentiment_probe.py`: complete acceptance tests.
@@ -36,6 +37,8 @@ there. Original review sentences are supplied under the repository MIT licence.
 4. In `accuracy`, return mean correctness as a Python float.
 5. In `errors`, return misclassified texts in their original order.
 6. Run the tests and completed script. Save its JSON and fill in `RESULTS.md`.
+   The runner also scores the product and service reviews with the same
+   threshold, to show what happens outside the film-review domain.
 
 The runner scores the selection sentences and chooses the threshold before
 using test outcomes. Do not retune the candidates or intended labels after
@@ -45,7 +48,8 @@ independent sample from a deployment population.
 ## What to record
 
 Record the exact software and checkpoint revision, selected threshold,
-selection accuracy, test accuracy before/after and the returned error list.
+selection accuracy, test accuracy before/after and the returned error list, and
+the accuracy, errors and error scores on the product and service reviews.
 Save the script's complete JSON as `results.json` next to this file.
 
 ## What to explain
@@ -54,6 +58,8 @@ Save the script's complete JSON as `results.json` next to this file.
 - Why does this procedure not fine-tune the model or calibrate its confidence?
 - If there are errors, inspect one. If there are none, explain why perfect
   accuracy on twelve author-written examples is weak evidence about real reviews.
+- On the product and service reviews, could any candidate threshold have
+  repaired the errors? What does the size of their positive scores say?
 - What new data and evaluation would be needed before adapting the model?
 
 ## Verification

@@ -12,6 +12,7 @@ repository root.
 | `proxy_check.py` | How well the other features reveal whether an applicant is young |
 | `integrated_gradients.py` | Saliency and integrated gradients on a digit classifier: completeness and a sanity check |
 | `applied/` | A fairness audit with two mitigations |
+| `attribution_maps.py` | Figure data | Saliency and integrated gradients as images, for a trained and a random network |
 
 ```bash
 .venv/bin/python chapter-23-interpretability/shapley_exact.py

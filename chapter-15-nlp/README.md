@@ -16,6 +16,7 @@ Run commands from the repository root.
 | `duplicates_demo.py` | How duplicated messages inflate test scores, over ten splits |
 | `encoder.py`, `semantic_search.py` | Sentence embeddings from a pinned pretrained encoder; search by meaning vs by words |
 | `applied/` | 200 labels: TF-IDF vs frozen encoder vs fine-tuned encoder |
+| `multilingual_coverage.py` | — | The Kazakh sentence read by the multilingual XLM-R tokeniser (download with `--download`) |
 
 The first five rows need no download. The rest need the data and the model:
 

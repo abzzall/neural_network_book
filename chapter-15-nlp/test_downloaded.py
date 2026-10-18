@@ -89,3 +89,18 @@ def test_tokenizer_coverage(tmp_path):
     assert lines[0] == 'English: 7 words -> 8 tokens, 0 unknown'
     assert lines[2] == 'Kazakh: 4 words -> 12 tokens, 3 unknown'
     assert lines[3].split()[:3] == ['[UNK]'] * 3
+
+
+import multilingual_coverage  # noqa: E402
+
+needs_xlmr = pytest.mark.skipif(not (multilingual_coverage.CACHE / 'tokenizer.json').is_file(),
+                                reason='run multilingual_coverage.py --download first')
+
+
+@needs_xlmr
+def test_multilingual_coverage(tmp_path):
+    lines = run('multilingual_coverage.py', tmp_path)
+    assert lines[0] == 'vocabulary size: 250002'
+    assert lines[1] == 'English: 7 words -> 10 tokens, 0 unknown'
+    assert lines[3] == 'Kazakh: 4 words -> 6 tokens, 0 unknown'
+    assert lines[4].split()[0] == '▁Қазақстан'

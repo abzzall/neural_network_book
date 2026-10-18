@@ -114,3 +114,15 @@ def test_segmentation_experiment_as_reader(relative, tmp_path):
     assert [run['threshold'] for run in runs] == [.6, .3, .5]
     for run, expected in zip(runs, reference):
         np.testing.assert_allclose(run['dice'], expected['dice'], atol=.025, rtol=0)
+
+
+def test_segment_picture(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'segment_picture.py'), str(tmp_path)],
+                           cwd=tmp_path, capture_output=True, text=True, check=True,
+                           timeout=600).stdout.splitlines()
+    assert lines[0] == 'thresholds: network 0.6, intensity 0.5'
+    for line in lines[1:]:
+        net = float(line.split('network ')[1].split(',')[0])
+        base = float(line.split('threshold ')[1])
+        assert net > 0.9 and net > base                     # the network wins on both images
+    assert len(list(tmp_path.glob('*.dat'))) == 8

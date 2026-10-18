@@ -9,6 +9,7 @@ repository root.
 | `residual.py` | Listing 12.2 | A residual block, and that it passes its input through when F(x) = 0 |
 | `digits_data.py` | — | The digits as 1 x 8 x 8 images, with training and evaluation helpers |
 | `transfer_demo.py` | — | Reusing features learned on digits 0-4 for digits 5-9: an honest negative result |
+| `feature_maps.py` | Figure data | The learned first-layer kernels and their feature maps for one digit |
 | `test_scripts.py` | — | Runs every script and checks what it prints |
 | `applied/` | Applied analysis | A CNN against an MLP on original and shifted digits, with augmentation |
 

@@ -113,3 +113,14 @@ def test_depth_experiment_as_reader(relative, tmp_path):
     for run, expected in zip(runs, reference):
         assert (run['seed'], run['depth']) == (expected['seed'], expected['depth'])
         assert abs(run['test_accuracy'] - expected['test_accuracy']) < .03
+
+
+def test_depth_diagnosis(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'depth_diagnosis.py')], cwd=HERE,
+                           capture_output=True, text=True, check=True,
+                           timeout=600).stdout.splitlines()
+    value = {line.split(' = ')[0]: float(line.split(' = ')[1]) for line in lines}
+    assert value['depth 8: signal size at start'] < value['depth 4: signal size at start'] / 10
+    assert value['depth 8: first-layer gradient norm'] < value['depth 4: first-layer gradient norm'] / 10
+    assert abs(value['depth 8: training loss at end'] - 0.693) < 0.01    # never leaves log 2
+    assert value['depth 4: training loss at end'] < 0.05

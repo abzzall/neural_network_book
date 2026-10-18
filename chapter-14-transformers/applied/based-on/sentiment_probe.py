@@ -34,11 +34,18 @@ def run():
     threshold = choose_threshold(calibration_p, np.asarray(calibration_y))
     # Test labels do not select the threshold or any model parameters.
     test_p = positive_scores(classifier, list(test_texts))
+    # Product and service reviews: written before scoring, to test a domain shift.
+    shift_texts, shift_y = zip(*examples['shift'])
+    shift_p = positive_scores(classifier, list(shift_texts))
     return {'threshold': threshold,
             'calibration_accuracy': accuracy(calibration_p, calibration_y, threshold),
             'test_accuracy_before': accuracy(test_p, test_y, 0.5),
             'test_accuracy_after': accuracy(test_p, test_y, threshold),
-            'test_errors': errors(test_texts, test_p, test_y, threshold)}
+            'test_errors': errors(test_texts, test_p, test_y, threshold),
+            'shift_accuracy': accuracy(shift_p, shift_y, threshold),
+            'shift_errors': errors(shift_texts, shift_p, shift_y, threshold),
+            'shift_error_scores': [round(float(p), 3) for p, y in zip(shift_p, shift_y)
+                                   if int(p >= threshold) != y]}
 
 
 if __name__ == '__main__':

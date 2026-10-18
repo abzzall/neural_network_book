@@ -100,8 +100,9 @@ including an optional, explicitly downloaded pretrained sentiment checkpoint.
 Routine tests never download weights and report skips when that checkpoint is absent.
 
 Chapter 15 adds [text-processing examples](chapter-15-nlp/README.md). Its
-SMS Spam Collection data and pinned sentence encoder are downloaded only on
-request (`--download`); tests that need them report skips until then.
+SMS Spam Collection data, pinned sentence encoder and the multilingual XLM-R
+tokeniser are downloaded only on request (`--download`); tests that need them
+report skips until then.
 
 Downloads and optional packages of later chapters, all requested explicitly
 and none stored in this repository:

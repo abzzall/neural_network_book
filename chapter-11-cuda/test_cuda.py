@@ -11,7 +11,7 @@ import torch
 HERE = Path(__file__).resolve().parent
 CUDA = pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA unavailable')
 SCRIPTS = ['device_demo', 'timing_demo', 'memory_transfer', 'amp_demo',
-           'compile_demo', 'triton_add', 'profile_demo']
+           'compile_demo', 'triton_add', 'profile_demo', 'size_sweep']
 
 
 def run(name, cwd, cpu=False):
@@ -91,3 +91,12 @@ def test_triton_rejects_unsupported_inputs(load_script):
             m.add(a, b)
     with pytest.raises(ValueError, match='forward-only'):
         m.add(x.requires_grad_(), x)
+
+
+@CUDA
+def test_size_sweep(tmp_path):
+    lines = run('size_sweep', tmp_path)
+    rows = [[float(v) for v in line.split()] for line in lines[1:]]
+    assert [int(r[0]) for r in rows] == [32, 128, 512, 2048]
+    assert all(r[1] > 0 and r[2] > 0 and r[3] > r[2] for r in rows)   # copies cost time
+    assert rows[-1][4] > 5                         # a large product is much faster on the GPU

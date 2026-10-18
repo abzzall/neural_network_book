@@ -14,6 +14,7 @@ are generated. Nothing is downloaded.
 | `ring_data.py`, `gan_2d.py` | A GAN on eight clusters: modes covered, three seeds |
 | `diffusion_2d.py` | A denoising diffusion model on the same clusters; forward process checked step by step |
 | `applied/` | Anomaly alarm: threshold, recall, false alarms, precision at low prevalence |
+| `vae_samples.py` | Figure data | Thirty new digits from each of two VAEs |
 
 ```bash
 .venv/bin/python chapter-20-generative/elbo_example.py

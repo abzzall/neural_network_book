@@ -9,13 +9,11 @@ from tiny_unet import TinyUNet
 from vision_shapes import flip_pair, make_shapes
 
 
-def run(seed=42, epochs=40, loss_fn=segmentation_loss,
-        threshold_fn=choose_threshold, score_fn=class_dice):
+def train_model(seed=42, epochs=40, loss_fn=segmentation_loss):
+    """Train on the fixed synthetic training images; return the model in evaluation mode."""
     torch.set_num_threads(1)
     torch.manual_seed(seed)
     train_x, train_y = make_shapes(128, 10)
-    val_x, val_y = make_shapes(32, 11)
-    test_x, test_y = make_shapes(64, 12)
     model = TinyUNet()
     optimiser = torch.optim.Adam(model.parameters(), lr=.003)
     generator = torch.Generator().manual_seed(seed)
@@ -28,7 +26,14 @@ def run(seed=42, epochs=40, loss_fn=segmentation_loss,
             loss = loss_fn(model(images), masks)
             loss.backward()
             optimiser.step()
-    model.eval()
+    return model.eval()
+
+
+def run(seed=42, epochs=40, loss_fn=segmentation_loss,
+        threshold_fn=choose_threshold, score_fn=class_dice):
+    model = train_model(seed, epochs, loss_fn)
+    val_x, val_y = make_shapes(32, 11)
+    test_x, test_y = make_shapes(64, 12)
     with torch.inference_mode():
         threshold = threshold_fn(model(val_x).sigmoid(), val_y)
         baseline_threshold = threshold_fn(val_x, val_y)

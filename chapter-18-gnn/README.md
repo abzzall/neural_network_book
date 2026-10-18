@@ -12,6 +12,7 @@ Run commands from the companion repository root using the existing environment.
 | `link_prediction.py` | Held-out edge removal and negative sampling without duplicates |
 | `smoothing_demo.py` | Linear mixing on a regular cycle, without learned weights |
 | `graph_data.py`, `depth_experiment.py` | Original synthetic graph and validation-selected depth experiment |
+| `depth_diagnosis.py` | Applied solution | Why the eight-layer GCN fails: vanishing signal and gradient |
 
 ```bash
 .venv/bin/python chapter-18-gnn/gcn_numpy.py

@@ -1,27 +1,137 @@
 {
   "licence": "Original examples released under the repository MIT licence.",
   "calibration": [
-    ["A delightful film with a warm and satisfying ending.", 1],
-    ["The cast gives a moving performance in a beautiful story.", 1],
-    ["I enjoyed the clever dialogue and the lively characters.", 1],
-    ["Despite a slow opening, this is an excellent film.", 1],
-    ["A boring film with a confused plot and wooden acting.", 0],
-    ["The ending is dreadful and the dialogue is painful.", 0],
-    ["I regret spending an evening on this tedious story.", 0],
-    ["Despite a promising opening, the film becomes a disappointment.", 0]
+    [
+      "A delightful film with a warm and satisfying ending.",
+      1
+    ],
+    [
+      "The cast gives a moving performance in a beautiful story.",
+      1
+    ],
+    [
+      "I enjoyed the clever dialogue and the lively characters.",
+      1
+    ],
+    [
+      "Despite a slow opening, this is an excellent film.",
+      1
+    ],
+    [
+      "A boring film with a confused plot and wooden acting.",
+      0
+    ],
+    [
+      "The ending is dreadful and the dialogue is painful.",
+      0
+    ],
+    [
+      "I regret spending an evening on this tedious story.",
+      0
+    ],
+    [
+      "Despite a promising opening, the film becomes a disappointment.",
+      0
+    ]
   ],
   "test": [
-    ["The story was simple, but I loved every minute.", 1],
-    ["A thoughtful and rewarding film that deserves another viewing.", 1],
-    ["I expected a disaster, but the film was wonderful.", 1],
-    ["The photography is beautiful and the ending feels earned.", 1],
-    ["Not a bad film at all; I would happily watch it again.", 1],
-    ["This is exactly the sort of joyful comedy I hoped for.", 1],
-    ["An impressive cast cannot rescue this empty story.", 0],
-    ["I expected a masterpiece, but the result was awful.", 0],
-    ["The first scene works, but everything after it disappoints.", 0],
-    ["A forgettable film that mistakes noise for excitement.", 0],
-    ["The film is not worth recommending to anyone.", 0],
-    ["Wonderful: another two hours wasted on a predictable sequel.", 0]
+    [
+      "The story was simple, but I loved every minute.",
+      1
+    ],
+    [
+      "A thoughtful and rewarding film that deserves another viewing.",
+      1
+    ],
+    [
+      "I expected a disaster, but the film was wonderful.",
+      1
+    ],
+    [
+      "The photography is beautiful and the ending feels earned.",
+      1
+    ],
+    [
+      "Not a bad film at all; I would happily watch it again.",
+      1
+    ],
+    [
+      "This is exactly the sort of joyful comedy I hoped for.",
+      1
+    ],
+    [
+      "An impressive cast cannot rescue this empty story.",
+      0
+    ],
+    [
+      "I expected a masterpiece, but the result was awful.",
+      0
+    ],
+    [
+      "The first scene works, but everything after it disappoints.",
+      0
+    ],
+    [
+      "A forgettable film that mistakes noise for excitement.",
+      0
+    ],
+    [
+      "The film is not worth recommending to anyone.",
+      0
+    ],
+    [
+      "Wonderful: another two hours wasted on a predictable sequel.",
+      0
+    ]
+  ],
+  "shift": [
+    [
+      "The battery lasts all day and the screen is bright.",
+      1
+    ],
+    [
+      "The vacuum is loud, but it picks up every crumb.",
+      1
+    ],
+    [
+      "This thriller is unpredictable from start to finish.",
+      1
+    ],
+    [
+      "Delivery took a week, yet the chair is sturdy and comfortable.",
+      1
+    ],
+    [
+      "My phone survived a fall from the table without a scratch.",
+      1
+    ],
+    [
+      "The soup arrived cold, but the staff replaced it at once with a better one.",
+      1
+    ],
+    [
+      "The steering is unpredictable on wet roads.",
+      0
+    ],
+    [
+      "The battery drains in two hours.",
+      0
+    ],
+    [
+      "The hotel room was small, dark and smelled of smoke.",
+      0
+    ],
+    [
+      "Customer support answered quickly but never solved the problem.",
+      0
+    ],
+    [
+      "The shoes looked great in the photos and fell apart in a month.",
+      0
+    ],
+    [
+      "The app is beautiful, but it crashes every time I open it.",
+      0
+    ]
   ]
 }
