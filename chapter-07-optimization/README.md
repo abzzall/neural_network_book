@@ -8,6 +8,7 @@ repository root.
 | `optimizer_paths.py` | Figure data | Gradient descent, momentum, RMSProp and Adam on a narrow valley, each at its best learning rate |
 | `adam_by_hand.py` | Worked example | Three steps of Adam with every quantity shown |
 | `init_demo.py` | Figure data | How the scale of random weights changes the signal through ten layers |
+| `debug_checks.py` | Debugging checklist | The initial loss, memorising a tiny batch, and a learning rate far too large |
 | `test_scripts.py` | — | Runs every script and checks every printed line |
 | `applied/` | Applied analysis | The digits network trained with four optimisers |
 

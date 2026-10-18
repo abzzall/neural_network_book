@@ -5,7 +5,8 @@ from sklearn import metrics as skm
 
 from nnbook import (BatchNorm, Dense, Dropout, Network, ReLU, SoftmaxCrossEntropy,
                     max_relative_error)
-from nnbook.metrics import confusion_matrix, precision_recall_f1, r2, roc_auc
+from nnbook.metrics import (brier_score, confusion_matrix, expected_calibration_error,
+                            precision_recall_f1, r2, reliability, roc_auc)
 from nnbook.model_selection import kfold
 
 rng = np.random.default_rng(0)
@@ -63,3 +64,15 @@ def test_early_stopping_restores_the_best_parameters():
     net.fit(X, y, learning_rate=0.5, epochs=300, validation=(Xv, yv), patience=10)
     assert len(net.losses) < 300
     assert np.isclose(net.loss_value(Xv, yv), min(net.val_losses))
+
+
+def test_calibration_metrics():
+    y = np.array([0, 0, 1, 1, 1, 0, 1, 0])
+    p = np.array([0.05, 0.15, 0.95, 0.85, 0.55, 0.45, 0.65, 0.35])
+    assert np.isclose(brier_score(y, p), skm.brier_score_loss(y, p))
+    rows = reliability(y, p, bins=2)              # bins [0, 0.5) and [0.5, 1]
+    assert np.allclose(rows, [[0.5, 0.25, 0.0], [0.5, 0.75, 1.0]])
+    assert np.isclose(expected_calibration_error(y, p, bins=2), 0.25)
+    perfect = np.repeat([0.2, 0.8], 10)
+    outcome = np.array([1, 1] + [0] * 8 + [1] * 8 + [0, 0])
+    assert np.isclose(expected_calibration_error(outcome, perfect), 0.0)

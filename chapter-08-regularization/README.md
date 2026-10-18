@@ -10,6 +10,8 @@ repository root.
 | `ridge_demo.py` | — | An L2 penalty tames a degree-12 polynomial |
 | `cv_demo.py` | — | Five-fold cross-validation chooses the penalty |
 | `metrics_demo.py` | Worked example | Accuracy, precision, recall, F1 and ROC-AUC, checked against scikit-learn |
+| `calibration_demo.py` | Figure data | An accurate but overconfident network, the Brier score and ECE, and Platt scaling |
+| `compare_models.py` | — | Paired fold differences, a paired t-test and a bootstrap interval for two models |
 | `test_scripts.py` | — | Runs every script and checks what it prints |
 | `applied/` | Applied analysis | Overfitting on 200 digits, and four ways to regularise |
 

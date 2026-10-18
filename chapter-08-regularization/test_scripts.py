@@ -10,6 +10,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import numpy as np
+
 HERE = Path(__file__).parent
 NUMBER = r"[-+]?\d*\.?\d+(?:e[-+]?\d+)?"
 
@@ -67,3 +69,25 @@ def test_metrics_demo():
         "matches scikit-learn: True",
         "ROC-AUC = 0.9375 (scikit-learn 0.9375)",
     ]
+
+
+def test_calibration_demo(tmp_path):
+    same(run("calibration_demo.py", str(tmp_path)), [
+        "logistic regression  accuracy = 0.7847, Brier = 0.1470, ECE = 0.0458",
+        "network              accuracy = 0.8480, Brier = 0.1272, ECE = 0.1112",
+        "network + Platt      accuracy = 0.8447, Brier = 0.1084, ECE = 0.0270",
+    ], rtol=1e-3)
+    for tag in ("raw", "platt"):
+        rows = np.loadtxt(tmp_path / f"reliability_{tag}.dat", skiprows=1)
+        assert np.isclose(rows[:, 0].sum(), 1.0)       # bin shares cover the test set
+
+
+def test_compare_models():
+    same(run("compare_models.py"), [
+        "logistic 10-fold accuracy = 0.9672 +- 0.0117",
+        "network  10-fold accuracy = 0.9738 +- 0.0090",
+        "paired differences: mean = 0.0067, sd = 0.0123, network better in 7 folds, worse in 2",
+        "paired t = 1.718, p = 0.120 (scipy: 0.120)",
+        "test set: difference = 0.0044, 95% bootstrap interval [-0.0111, 0.0200]",
+        "digits only the network gets right: 7, only logistic: 5",
+    ], rtol=1e-3)

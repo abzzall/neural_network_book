@@ -48,3 +48,15 @@ def test_init_demo(tmp_path):
         "ReLU, Glorot    std after layers 1, 5, 10: 0.5879, 0.1422, 0.0254",
         "ReLU, He        std after layers 1, 5, 10: 0.8315, 0.8044, 0.8118",
     ]
+
+
+def test_debug_checks():
+    lines = run("debug_checks.py")
+    assert lines[:4] == [
+        "log 10 = 2.3026",
+        "initial loss, standardised inputs = 2.4224",
+        "initial loss, raw pixels          = 5.3896",
+        "loss after memorising 20 samples  = 0.000885",
+    ]
+    exploded = float(lines[4].split("=")[1])
+    assert exploded > 5 * 2.3026                      # far above the starting loss

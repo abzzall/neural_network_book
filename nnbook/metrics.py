@@ -40,3 +40,25 @@ def mae(y, y_hat):
 
 def r2(y, y_hat):
     return float(1 - np.sum((y - y_hat) ** 2) / np.sum((y - y.mean()) ** 2))
+
+
+def brier_score(y_true, p):
+    """Mean squared difference between predicted probabilities and 0/1 outcomes."""
+    return float(np.mean((p - y_true) ** 2))
+
+
+def reliability(y_true, p, bins=10):
+    """Per equal-width bin: share of samples, mean predicted probability, observed frequency."""
+    index = np.minimum((p * bins).astype(int), bins - 1)
+    rows = []
+    for k in range(bins):
+        inside = index == k
+        if inside.any():
+            rows.append((inside.mean(), p[inside].mean(), y_true[inside].mean()))
+    return np.array(rows)
+
+
+def expected_calibration_error(y_true, p, bins=10):
+    """Bin-weighted mean gap between confidence and observed frequency."""
+    rows = reliability(y_true, p, bins)
+    return float(np.sum(rows[:, 0] * np.abs(rows[:, 1] - rows[:, 2])))
