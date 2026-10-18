@@ -8,6 +8,7 @@ are downloaded by chapter 23; the other data sets are bundled with scikit-learn.
 |---|---|
 | `family_compare.py` | Logistic regression, gradient boosting and an MLP on two tables and one image set, 5-fold cross-validation |
 | `applied/` | A credit policy chosen by the data set's own cost matrix |
+| `boosting_scratch.py` | Listing, worked example | A regression tree split by hand and gradient boosting from scratch |
 
 ```bash
 .venv/bin/python chapter-23-interpretability/credit_data.py --download

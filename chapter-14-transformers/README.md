@@ -21,6 +21,7 @@ uv pip install -p .venv -r requirements.txt
 ```bash
 .venv/bin/python chapter-14-transformers/attention_demo.py
 .venv/bin/python chapter-14-transformers/position_demo.py
+.venv/bin/python chapter-14-transformers/rope_check.py      # rotary positions: the score depends only on the offset
 .venv/bin/python chapter-14-transformers/character_demo.py
 ```
 

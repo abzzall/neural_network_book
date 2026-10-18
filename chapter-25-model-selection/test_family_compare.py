@@ -29,3 +29,16 @@ def test_family_compare(tmp_path):
     for family in ('logistic regression', 'gradient boosting', 'neural network (MLP)'):
         assert scores[('breast cancer', family)] > 0.99
         assert 0.96 < scores[('digits', family)] < 0.98
+
+
+def test_boosting_scratch(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'boosting_scratch.py')], cwd=tmp_path, capture_output=True,
+                           text=True, check=True, timeout=600).stdout.splitlines()
+    assert lines[0] == ('best split x <= 3.5: leaf means 2.50 and 7.50, squared error 1.00 '
+                        '(no split: 38.50)')
+    assert float(lines[1].rsplit(' ', 1)[1]) < 1e-9          # equals scikit-learn
+    assert lines[2:] == [
+        '  1 trees: training MSE 23.590, validation MSE 21.252',
+        ' 10 trees: training MSE 9.945, validation MSE 9.822',
+        ' 50 trees: training MSE 1.620, validation MSE 3.076',
+        '200 trees: training MSE 0.459, validation MSE 2.064']

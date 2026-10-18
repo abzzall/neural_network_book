@@ -58,6 +58,7 @@ explains each step.
 | `tests/` | Tests for `nnbook` |
 | `chapter-NN-<topic>/` | Scripts for chapter NN, with their tests beside them; `applied/` holds the chapter's applied exercise |
 | `scripts/check-all.sh` | The repository-wide check |
+| `appendix-a-python-numpy/`, `appendix-c-answers/` | Appendix A examples; the numbers in the answers of appendix C |
 | `validation/` | How a clean checkout is verified |
 | `data/` | Downloaded datasets (not committed) |
 
@@ -109,6 +110,7 @@ and none stored in this repository:
 
 | Chapter | Download (`--download`) | Optional requirements file |
 |---|---|---|
+| 15 | SIB-200 Kazakh and English sentences; multilingual-e5-small (`kazakh_topics.py`) | none |
 | 16 | UCI Bike Sharing data; Chronos-Bolt tiny | `requirements-chronos.txt` |
 | 17 | TorchVision SSDLite weights | `chapter-17-vision/requirements.txt` |
 | 19 | none | `gymnasium==1.4.0` (comparison with Gymnasium's cart-pole) |

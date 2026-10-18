@@ -13,6 +13,7 @@ the data helpers of chapter 12 and is cached in `outputs/` on first use.
 | `serve_api.py` | Optional: a FastAPI prediction service with input validation |
 | `applied/` | Drift monitoring with PSI and the Kolmogorov-Smirnov statistic |
 | `fgsm_picture.py` | Figure data | One digit before and after an FGSM attack, and the change |
+| `ood_demo.py` | Table | Flagging unfamiliar inputs by confidence and by distance |
 
 ```bash
 .venv/bin/python chapter-24-deployment/quantize_numpy.py

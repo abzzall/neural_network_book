@@ -91,3 +91,18 @@ def test_compare_models():
         "test set: difference = 0.0044, 95% bootstrap interval [-0.0111, 0.0200]",
         "digits only the network gets right: 7, only logistic: 5",
     ], rtol=1e-3)
+
+
+def test_conformal_demo():
+    same(run("conformal_demo.py"), [
+        "test accuracy = 0.9644",
+        "answer 100% most confident: error rate 0.0356",
+        "answer 90% most confident: error rate 0.0099",
+        "answer 80% most confident: error rate 0.0000",
+        "alpha = 0.10: qhat = 0.2003, coverage = 0.9022, mean set size = 0.911, "
+        "single-class sets = 0.911, empty sets = 0.089, lowest class coverage = 0.727",
+        "  digits shifted one pixel: coverage = 0.2600",
+        "alpha = 0.02: qhat = 0.7374, coverage = 0.9778, mean set size = 1.042, "
+        "single-class sets = 0.958, empty sets = 0.000, lowest class coverage = 0.955",
+        "  digits shifted one pixel: coverage = 0.3911",
+    ], rtol=1e-3)

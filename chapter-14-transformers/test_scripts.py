@@ -36,3 +36,15 @@ def test_character_demo(tmp_path):
     sample = lines[2].split(': ')[1]
     assert len(sample) == 48 and sample.startswith('rain falls.')
     assert set(sample) <= set('rain falls. sun shines. wind blows. ')
+
+
+def test_rope_check(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'rope_check.py')], cwd=tmp_path,
+                           capture_output=True, text=True, check=True).stdout.splitlines()
+    assert lines == [
+        'query at  3, key at  1 (offset 2): score -1.763129',
+        'query at 12, key at 10 (offset 2): score -1.763129',
+        'query at 50, key at 48 (offset 2): score -1.763129',
+        'query at  5, key at  1 (offset 4): score -1.302115',
+        'norm kept: True',
+    ]

@@ -104,3 +104,21 @@ def test_multilingual_coverage(tmp_path):
     assert lines[1] == 'English: 7 words -> 10 tokens, 0 unknown'
     assert lines[3] == 'Kazakh: 4 words -> 6 tokens, 0 unknown'
     assert lines[4].split()[0] == '▁Қазақстан'
+
+
+import kazakh_topics  # noqa: E402
+
+needs_sib = pytest.mark.skipif(not (kazakh_topics.SIB[2].is_dir() and kazakh_topics.E5[2].is_dir()),
+                               reason='run kazakh_topics.py --download first')
+
+
+@needs_sib
+def test_kazakh_topics(tmp_path):
+    lines = run('kazakh_topics.py', tmp_path)
+    assert lines[0] == ('Kazakh: 701 training and 204 test sentences, vocabulary 5908 words, '
+                        '37.5% of test words unseen in training')
+    assert lines[1] == '  TF-IDF words          macro-F1 0.4987'
+    assert lines[2] == '  TF-IDF characters     macro-F1 0.6980'
+    assert abs(float(lines[3].split()[-1]) - 0.8673) < 0.01      # encoder: CPU arithmetic
+    assert lines[4].startswith('English: 701 training and 204 test sentences')
+    assert abs(float(lines[7].split()[-1]) - 0.8668) < 0.01

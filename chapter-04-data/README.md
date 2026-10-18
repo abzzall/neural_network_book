@@ -14,6 +14,8 @@ defect in it is known exactly; no external dataset is downloaded.
 | `leakage_demo.py` | Listing 4.2 | Feature selection on all the data makes pure noise look predictive |
 | `imbalance_demo.py` | — | Plain versus stratified splits of a 1-in-100 class, and class weights |
 | `pipeline_demo.py` | Listing 4.3 | The whole preparation as one scikit-learn pipeline |
+| `kmeans_demo.py` | Clustering | k-means from scratch on simulated customers; scaling and choosing k |
+| `annotation_agreement.py` | Worked example | Raw agreement and Cohen's kappa for two annotators |
 | `test_scripts.py` | — | Runs every script and checks every printed line |
 | `applied/` | Applied analysis | Cleaning, preparing, and fitting the listings; measuring a leak |
 

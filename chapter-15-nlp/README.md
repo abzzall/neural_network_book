@@ -17,6 +17,7 @@ Run commands from the repository root.
 | `encoder.py`, `semantic_search.py` | Sentence embeddings from a pinned pretrained encoder; search by meaning vs by words |
 | `applied/` | 200 labels: TF-IDF vs frozen encoder vs fine-tuned encoder |
 | `multilingual_coverage.py` | — | The Kazakh sentence read by the multilingual XLM-R tokeniser (download with `--download`) |
+| `kazakh_topics.py` | Section 15.8 | Topic classification of the same sentences in Kazakh and English (SIB-200, CC BY-SA 4.0; download with `--download`) |
 
 The first five rows need no download. The rest need the data and the model:
 

@@ -85,3 +85,22 @@ def test_pipeline_demo():
         "'cat__district_east', 'cat__district_north', 'cat__district_south']",
         "validation RMSE = 30.95 thousand",
     ]
+
+
+def test_kmeans_demo():
+    assert run("kmeans_demo.py") == [
+        "agreement with the true groups: raw features 0.825, standardised 1.000",
+        "inertia 127.79, scikit-learn 127.79",
+        "k = 2: inertia  621.29, silhouette 0.519",
+        "k = 3: inertia  127.79, silhouette 0.733",
+        "k = 4: inertia  111.78, silhouette 0.570",
+        "k = 5: inertia   95.80, silhouette 0.450",
+        "k = 6: inertia   81.93, silhouette 0.333",
+    ]
+
+
+def test_annotation_agreement():
+    assert run("annotation_agreement.py") == [
+        "balanced  : raw agreement 0.850, by chance 0.5000, kappa 0.700 (scikit-learn 0.700)",
+        "rare class: raw agreement 0.900, by chance 0.8698, kappa 0.232 (scikit-learn 0.232)",
+    ]

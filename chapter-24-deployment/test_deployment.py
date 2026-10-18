@@ -67,3 +67,19 @@ def test_fgsm_picture(tmp_path):
     assert label == before != after
     assert lines[1] == 'largest pixel change 0.10 of a range of 1'
     assert len(list(tmp_path.glob('*.dat'))) == 3
+
+
+def test_ood_demo(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'ood_demo.py')], cwd=tmp_path,
+                           capture_output=True, text=True, check=True,
+                           timeout=600).stdout.splitlines()
+    rates = {}
+    for line in lines:
+        name, rest = line.split(' flagged: ')
+        rates[name.strip()] = {k.rsplit(' ', 1)[0]: float(k.rsplit(' ', 1)[1])
+                               for k in rest.split(', ')}
+    # Book values: confidence 0.027, 0.400, 0.713, 0.635; distance 0.012, 0.156, 0.893, 1.000.
+    for method in rates.values():
+        assert method['new digits 0-8'] < 0.06                 # near the 5 % target
+    assert rates['distance']['inverted digits'] > rates['confidence']['inverted digits']
+    assert rates['confidence']['the digit 9'] > rates['distance']['the digit 9']

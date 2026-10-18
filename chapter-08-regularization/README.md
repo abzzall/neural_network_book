@@ -12,6 +12,7 @@ repository root.
 | `metrics_demo.py` | Worked example | Accuracy, precision, recall, F1 and ROC-AUC, checked against scikit-learn |
 | `calibration_demo.py` | Figure data | An accurate but overconfident network, the Brier score and ECE, and Platt scaling |
 | `compare_models.py` | — | Paired fold differences, a paired t-test and a bootstrap interval for two models |
+| `conformal_demo.py` | — | Abstaining on uncertain digits, and conformal prediction sets |
 | `test_scripts.py` | — | Runs every script and checks what it prints |
 | `applied/` | Applied analysis | Overfitting on 200 digits, and four ways to regularise |
 
