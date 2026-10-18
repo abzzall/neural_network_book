@@ -63,3 +63,15 @@ retrieval_hits: 20
 correct_without_retrieval: 1
 correct_with_retrieval: 19
 ```
+
+## Missing and conflicting retrieval evidence
+
+```bash
+.venv/bin/python chapter-21-llm/rag_failures.py
+```
+
+After the documented Qwen download, this diagnostic prints the raw answers,
+expected answers and exact-match indicators for supported, missing and conflicting
+original records. It isolates evidence use from retrieval ranking. Inspect the
+answers; model failure is evidence to record, not a test-suite failure to hide.
+Exact matching can reject a semantically correct answer with extra explanation.
