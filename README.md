@@ -8,17 +8,14 @@ mathematics; this repository provides the runnable programs. Every listing
 printed in the book is read directly from a file here, and every example is
 run and tested before it is published.
 
-## Repository rules
+## How the code is checked
 
-- Public commit messages, file contents, and documentation must not refer to
-  collaboration tools, assistants, or code-generation systems.
-- Commits must use `abzzall` as the author and committer identity.
 - An example is added only after it has been run and its results checked by a
   test. Numbers quoted in the book come from running the code.
 - Dependencies are pinned to exact versions. A library is added together with
   the first tested example that uses it.
-- Keep virtual environments, caches, downloaded datasets, and model weights
-  out of version control.
+- Virtual environments, caches, downloaded datasets, and model weights are
+  kept out of version control.
 
 ## Quick start
 
@@ -113,6 +110,7 @@ and none stored in this repository:
 |---|---|---|
 | 16 | UCI Bike Sharing data; Chronos-Bolt tiny | `requirements-chronos.txt` |
 | 17 | TorchVision SSDLite weights | `chapter-17-vision/requirements.txt` |
+| 19 | none | `gymnasium==1.4.0` (comparison with Gymnasium's cart-pole) |
 | 21 | GPT-2, Qwen2.5-0.5B-Instruct | none |
 | 22 | LAION CLIP ViT-B/32 (and the chapter 15 data and encoder) | none |
 | 23, 25 | UCI German Credit data | none |
