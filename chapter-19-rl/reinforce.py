@@ -34,7 +34,7 @@ def train(seed, episodes=600, gamma=0.99, lr=1e-2):
             done = terminated or truncated
         g = torch.tensor(returns_to_go(rewards, gamma))
         advantage = (g - g.mean()) / (g.std() + 1e-8)   # mean as baseline, eq. (19.8)
-        loss = -(torch.stack(log_probs) * advantage).sum()   # gradient of eq. (19.7)
+        loss = -(torch.stack(log_probs) * advantage).sum()   # discounted surrogate; episode normalisation is biased
         optimiser.zero_grad()
         loss.backward()
         optimiser.step()
