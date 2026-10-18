@@ -11,7 +11,9 @@ class SoftmaxCrossEntropy:
 
     def forward(self, Z, y):
         self.P, self.y = softmax(Z), y
-        return -np.mean(np.log(self.P[np.arange(len(y)), y] + 1e-12))
+        shifted = Z - Z.max(axis=1, keepdims=True)
+        log_normaliser = np.log(np.exp(shifted).sum(axis=1))
+        return np.mean(log_normaliser - shifted[np.arange(len(y)), y])
 
     def backward(self):
         G = self.P.copy()
