@@ -1,4 +1,4 @@
-"""The numbers quoted in appendix C are the numbers the script prints."""
+"""Selected numerical answers in appendix C are reproduced by this script."""
 
 from pathlib import Path
 import subprocess
@@ -32,6 +32,6 @@ def test_answer_values(tmp_path):
         '24.3 quantised codes: [-128, -64, 127], scale 0.007843, zero point -64, '
         'largest error 0.00196',
         '24.6 PSI: 0.4159',
-        '25.5 threshold for costs 2 and 3: 0.4',
-        '25.6 cost of the policy: 0.4000',
+        '26.8 threshold for costs 2 and 3: 0.4',
+        '26.9 cost of the policy: 0.4000',
     ]
