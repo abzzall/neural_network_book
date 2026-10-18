@@ -89,6 +89,7 @@ def test_compare_models():
         "paired differences: mean = 0.0067, sd = 0.0123, network better in 7 folds, worse in 2",
         "paired t = 1.718, p = 0.120 (scipy: 0.120)",
         "test set: difference = 0.0044, 95% bootstrap interval [-0.0111, 0.0200]",
+        "minimum useful gain = 0.0100, supported by interval: False",
         "digits only the network gets right: 7, only logistic: 5",
     ], rtol=1e-3)
 
@@ -99,10 +100,32 @@ def test_conformal_demo():
         "answer 100% most confident: error rate 0.0356",
         "answer 90% most confident: error rate 0.0099",
         "answer 80% most confident: error rate 0.0000",
-        "alpha = 0.10: qhat = 0.2003, coverage = 0.9022, mean set size = 0.911, "
+        "alpha = 0.10: qhat = 0.1985, coverage = 0.9022, mean set size = 0.911, "
         "single-class sets = 0.911, empty sets = 0.089, lowest class coverage = 0.727",
         "  digits shifted one pixel: coverage = 0.2600",
-        "alpha = 0.02: qhat = 0.7374, coverage = 0.9778, mean set size = 1.042, "
-        "single-class sets = 0.958, empty sets = 0.000, lowest class coverage = 0.955",
-        "  digits shifted one pixel: coverage = 0.3911",
+        "alpha = 0.02: qhat = 0.7068, coverage = 0.9778, mean set size = 1.033, "
+        "single-class sets = 0.967, empty sets = 0.000, lowest class coverage = 0.955",
+        "  digits shifted one pixel: coverage = 0.3800",
     ], rtol=1e-3)
+
+
+def test_conformal_uses_the_exact_rank_and_small_sample_boundary(load_script):
+    m = load_script("conformal_demo")
+    probabilities = np.column_stack((1 - np.arange(1, 448) / 448, np.arange(1, 448) / 448))
+    labels = np.zeros(447, dtype=int)
+    assert m.conformal_threshold(probabilities, labels, 0.1) == 404 / 448
+    assert np.isinf(m.conformal_threshold(probabilities[:1], labels[:1], 0.01))
+    assert m.prediction_sets(probabilities[:1], float('inf')).all()
+
+
+def test_precision_recall_worked_example(load_script):
+    m = load_script("pr_curve")
+    from sklearn.metrics import average_precision_score
+    labels = np.zeros(100, dtype=int)
+    labels[[0, 2, 9, 19, 49]] = 1
+    scores = np.linspace(1, 0, 100)
+    precision, recall, ap = m.ranked_curve(labels, scores)
+    assert np.allclose(precision[[0, 2, 9, 19, 49]], [1, 2/3, 3/10, 4/20, 5/50])
+    assert np.allclose(recall[[0, 2, 9, 19, 49]], [.2, .4, .6, .8, 1])
+    assert np.isclose(ap, average_precision_score(labels, scores))
+    assert run("pr_curve.py")[0] == "prevalence 0.05, average precision 0.4533"

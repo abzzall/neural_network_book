@@ -9,6 +9,7 @@ repository root.
 | `bias_variance.py` | Figure data | Training and validation error of polynomials of degree 0 to 15 |
 | `ridge_demo.py` | — | An L2 penalty tames a degree-12 polynomial |
 | `cv_demo.py` | — | Five-fold cross-validation chooses the penalty |
+| `pr_curve.py` | Worked example | Rare-event precision-recall and non-interpolated AP |
 | `metrics_demo.py` | Worked example | Accuracy, precision, recall, F1 and ROC-AUC, checked against scikit-learn |
 | `calibration_demo.py` | Figure data | An accurate but overconfident network, the Brier score and ECE, and Platt scaling |
 | `compare_models.py` | — | Paired fold differences, a paired t-test and a bootstrap interval for two models |
@@ -35,3 +36,18 @@ digits can differ slightly between machines; the tests allow for this.
 Start from `applied/INSTRUCTIONS.md`. The starting point is `applied/based-on/`
 (its tests fail until you complete it); the finished code is
 `applied/full-code/`.
+
+## Numerical checks and interpretation
+
+`SoftmaxCrossEntropy` uses log-sum-exp on logits, with an extreme-logit gradient
+test in `tests/test_network.py`. Conformal thresholds use the exact finite-sample
+order statistic and include every class when the requested rank exceeds the
+calibration sample count. `compare_models.py` reports a paired bootstrap interval
+against a prespecified one-percentage-point useful gain. Its overlapping-fold
+t-test is a naive diagnostic, not a calibrated significance test.
+
+```bash
+.venv/bin/python chapter-08-regularization/pr_curve.py
+.venv/bin/python chapter-08-regularization/compare_models.py
+.venv/bin/python chapter-08-regularization/conformal_demo.py
+```

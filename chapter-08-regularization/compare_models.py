@@ -44,4 +44,6 @@ if __name__ == "__main__":
     only_log = np.sum(right["logistic"] & ~right["network"])
     print(f"test set: difference = {right['network'].mean() - right['logistic'].mean():.4f}, "
           f"95% bootstrap interval [{low:.4f}, {high:.4f}]")
+    practical_gain = 0.01  # one percentage point, fixed before assessing the interval
+    print(f"minimum useful gain = {practical_gain:.4f}, supported by interval: {low > practical_gain}")
     print(f"digits only the network gets right: {only_net}, only logistic: {only_log}")

@@ -26,8 +26,12 @@ def risk_at_coverage(p, labels, coverage):
 def conformal_threshold(p, labels, alpha):
     """Split conformal: quantile of the scores 1 - p(true class) on calibration data."""
     scores = 1 - p[np.arange(len(labels)), labels]
-    level = np.ceil((len(labels) + 1) * (1 - alpha)) / len(labels)
-    return float(np.quantile(scores, level, method="higher"))
+    if len(scores) == 0 or not 0 < alpha < 1:
+        raise ValueError("need calibration samples and 0 < alpha < 1")
+    rank = int(np.ceil((len(scores) + 1) * (1 - alpha)))
+    if rank > len(scores):
+        return float('inf')  # include every class when calibration is too small
+    return float(np.partition(scores, rank - 1)[rank - 1])
 
 
 def prediction_sets(p, qhat):
