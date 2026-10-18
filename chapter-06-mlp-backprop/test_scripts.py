@@ -58,3 +58,13 @@ def test_approximation_demo():
     ]
     for line in lines[3:]:                     # values below 1e-10 are rounding noise
         assert float(line.split("=")[-1]) < 1e-10
+
+
+def test_output_heads():
+    assert run("output_heads.py") == [
+        "counts, identity + squared error:  18.6% of predictions negative, Poisson deviance 3.453",
+        "counts, exp + Poisson likelihood:  0.0% of predictions negative, Poisson deviance 1.028",
+        "  learned weights [ 0.529  0.998 -0.695], true [0.5, 1.0, -0.7]",
+        "95% interval, one spread for all:  covers 100.0% where |x| < 1, 82.3% where |x| > 2",
+        "95% interval, predicted spread:    covers 95.8% where |x| < 1, 96.2% where |x| > 2",
+    ]

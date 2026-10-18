@@ -73,8 +73,8 @@ data before trusting a model's features.
 
 - **SMS Spam Collection v.1** (5574 messages, 747 spam), T. A. Almeida and
   J. M. Gomez Hidalgo, UCI Machine Learning Repository,
-  doi 10.24432/C5CC84. Provided free of charge with no limitations other than
-  the authors' copyright and a warranty disclaimer; please cite Almeida,
+  doi 10.24432/C5CC84. Licensed CC BY 4.0 by the UCI Machine Learning
+  Repository; the authors ask users to cite Almeida,
   Gomez Hidalgo and Yamakami (2011). Downloaded by `spam_data.py` and checked
   against a SHA-256 hash; not stored in this repository.
 - **all-MiniLM-L6-v2** (`sentence-transformers/all-MiniLM-L6-v2`, revision

@@ -8,6 +8,7 @@ repository root.
 | `backprop_by_hand.py` | Worked example | One forward and one backward pass through a 2-2-1 network |
 | `xor_mlp.py` | Figure data | Two hidden units learn XOR; the hidden features make it separable |
 | `approximation_demo.py` | — | Wider hidden layers can approximate sin(2x) more closely |
+| `output_heads.py` | Section 6.3 | The kind of target decides the output layer and loss: Poisson counts, a predicted spread |
 | `test_scripts.py` | — | Runs every script and checks what it prints |
 | `applied/` | Applied analysis | A multilayer network from scratch on handwritten digits |
 

@@ -104,3 +104,27 @@ def test_annotation_agreement():
         "balanced  : raw agreement 0.850, by chance 0.5000, kappa 0.700 (scikit-learn 0.700)",
         "rare class: raw agreement 0.900, by chance 0.8698, kappa 0.232 (scikit-learn 0.232)",
     ]
+
+
+def test_group_leakage():
+    assert run("group_leakage.py") == [
+        "100 patients, 10 visits each, 1000 rows",
+        "rows split at random:     accuracy 0.919 +- 0.025",
+        "patients kept together:   accuracy 0.544 +- 0.087",
+    ]
+
+
+def test_feature_heatmap(tmp_path):
+    lines = run("feature_heatmap.py", str(tmp_path))
+    assert lines == [
+        "most correlated features: radius and perimeter, r = 0.998",
+        "most correlated features: radius and area, r = 0.987",
+        "most correlated features: perimeter and area, r = 0.987",
+        "with the diagnosis: concave points     r = 0.777, mutual information 0.442 nats",
+        "with the diagnosis: perimeter          r = 0.743, mutual information 0.404 nats",
+        "with the diagnosis: radius             r = 0.730, mutual information 0.366 nats",
+        "weakest: fractal dimension r = -0.013, mutual information 0.007",
+        "features: radius, texture, perimeter, area, smoothness, compactness, concavity, "
+        "concave points, symmetry, fractal dimension",
+    ]
+    assert (tmp_path / "correlation.dat").is_file()

@@ -110,6 +110,7 @@ and none stored in this repository:
 
 | Chapter | Download (`--download`) | Optional requirements file |
 |---|---|---|
+| 12 | Kazakh Speech Commands (`kazakh_keywords.py`) | none |
 | 15 | SIB-200 Kazakh and English sentences; multilingual-e5-small (`kazakh_topics.py`) | none |
 | 16 | UCI Bike Sharing data; Chronos-Bolt tiny | `requirements-chronos.txt` |
 | 17 | TorchVision SSDLite weights | `chapter-17-vision/requirements.txt` |
@@ -120,8 +121,7 @@ and none stored in this repository:
 | 24 | none | `requirements-deployment.txt` |
 
 Each chapter README states the licence or terms of its data and weights. Most
-are MIT, Apache-2.0, BSD or CC BY 4.0; the SMS Spam Collection is free to use
-with a citation request, and the TorchVision weights of chapter 17 come with
+are MIT, Apache-2.0, BSD or CC BY 4.0, and the TorchVision weights of chapter 17 come with
 the separate terms of their training data, as that README explains.
 
 Chapter 11 adds optional CUDA examples. Its [environment instructions](chapter-11-cuda/README.md)

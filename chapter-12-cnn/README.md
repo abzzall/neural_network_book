@@ -10,11 +10,17 @@ repository root.
 | `digits_data.py` | — | The digits as 1 x 8 x 8 images, with training and evaluation helpers |
 | `transfer_demo.py` | — | Reusing features learned on digits 0-4 for digits 5-9: an honest negative result |
 | `feature_maps.py` | Figure data | The learned first-layer kernels and their feature maps for one digit |
+| `kazakh_keywords.py` | Section 12.6, figure 12.5 | Log-mel spectrograms of spoken Kazakh commands and a CNN; robustness to noise (download first) |
 | `test_scripts.py` | — | Runs every script and checks what it prints |
 | `applied/` | Applied analysis | A CNN against an MLP on original and shifted digits, with augmentation |
 
 Data: UCI Optical Recognition of Handwritten Digits (Alpaydin and Kaynak, 1998,
 https://doi.org/10.24432/C50P49, CC BY 4.0), distributed with scikit-learn.
+
+The spoken commands are the Kazakh Speech Commands Dataset (ISSAI, Kuzdeuov
+et al. 2023, MIT licence), pinned to revision `8efc3b8` and downloaded only on
+request (75 MB) with `kazakh_keywords.py --download`; its test is skipped until
+then. Training takes a few minutes on a CPU.
 
 ```bash
 .venv/bin/python chapter-12-cnn/conv_numpy.py

@@ -15,6 +15,8 @@ defect in it is known exactly; no external dataset is downloaded.
 | `imbalance_demo.py` | — | Plain versus stratified splits of a 1-in-100 class, and class weights |
 | `pipeline_demo.py` | Listing 4.3 | The whole preparation as one scikit-learn pipeline |
 | `kmeans_demo.py` | Clustering | k-means from scratch on simulated customers; scaling and choosing k |
+| `group_leakage.py` | Leakage | Ten visits per patient: random-row folds against GroupKFold |
+| `feature_heatmap.py` | Figure 4.3 | Correlation heat map of ten breast-cancer features; correlation and mutual information with the diagnosis |
 | `annotation_agreement.py` | Worked example | Raw agreement and Cohen's kappa for two annotators |
 | `test_scripts.py` | — | Runs every script and checks every printed line |
 | `applied/` | Applied analysis | Cleaning, preparing, and fitting the listings; measuring a leak |

@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 import torch
 
 HERE = Path(__file__).parent
@@ -62,3 +63,24 @@ def test_feature_maps(tmp_path):
     assert out[2].startswith("feature maps with the largest total response: [")
     assert out[3].startswith("maps that are zero everywhere: ")
     assert len(list(tmp_path.glob("*.dat"))) == 9
+
+
+sys.path.insert(0, str(HERE))
+import kazakh_keywords  # noqa: E402
+
+
+@pytest.mark.skipif(not (kazakh_keywords.FOLDER / 'data').is_dir(),
+                    reason='run kazakh_keywords.py --download first')
+def test_kazakh_keywords(tmp_path):
+    out = subprocess.run([sys.executable, 'kazakh_keywords.py', '--figures', str(tmp_path)],
+                         cwd=HERE, capture_output=True, text=True, check=True,
+                         timeout=1800).stdout.splitlines()
+    assert out[0] == ('2898 training and 725 test recordings of 35 commands, '
+                      'spectrogram (40, 101)')
+    assert out[1] == 'baseline on the time-averaged spectrum: accuracy 0.2441'
+    # PyTorch training: the book's machine printed 0.9103, 0.6676, 0.3090 and 0.0648.
+    accuracy = [float(line.rsplit(' ', 1)[1]) for line in out[2:6]]
+    assert abs(accuracy[0] - 0.9103) < 0.03
+    assert accuracy[0] > accuracy[1] > accuracy[2] > accuracy[3]
+    assert out[6].startswith('most frequent confusion: ')
+    assert len(list(tmp_path.glob('spectrogram_*.dat'))) == 2
