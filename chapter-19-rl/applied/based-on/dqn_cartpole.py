@@ -45,7 +45,7 @@ class Replay:
 
 
 def td_target(target_net, r, s2, terminated):
-    """Step 3: the TD target of eq. (19.6); no bootstrap after termination."""
+    """Step 3: eq. (19.9) [eq:rl-dqn-target]; no bootstrap after termination."""
     raise NotImplementedError("Step 3: complete td_target")
 
 

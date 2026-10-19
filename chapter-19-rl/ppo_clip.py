@@ -4,7 +4,7 @@ import torch
 
 
 def clipped_objective(ratio, advantage, epsilon=0.2):
-    """min(r A, clip(r, 1 - eps, 1 + eps) A), eq. (19.9); PPO maximises its mean."""
+    """PPO maximises min(r A, clip(r) A), eq. (19.8) [eq:rl-ppo]."""
     clipped = torch.clamp(ratio, 1 - epsilon, 1 + epsilon)
     return torch.minimum(ratio * advantage, clipped * advantage)
 

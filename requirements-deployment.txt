@@ -5,4 +5,5 @@ onnx==1.23.2
 onnxruntime==1.31.0
 onnxscript==0.7.2
 fastapi==0.143.3
+pydantic==2.14.1
 httpx==0.28.1

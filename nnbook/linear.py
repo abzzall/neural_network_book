@@ -31,12 +31,12 @@ class LogisticRegression:
         n, d = X.shape
         self.w, self.b, self.losses = np.zeros(d), 0.0, []
         for _ in range(self.epochs):
-            p = sigmoid(X @ self.w + self.b)
+            z = X @ self.w + self.b
+            p = sigmoid(z)
             error = p - y                                # prediction errors
             self.w -= self.learning_rate * X.T @ error / n
             self.b -= self.learning_rate * error.mean()
-            eps = 1e-12
-            self.losses.append(-np.mean(y * np.log(p + eps) + (1 - y) * np.log(1 - p + eps)))
+            self.losses.append(np.mean(np.logaddexp(0, z) - y * z))
         return self
 
     def predict_proba(self, X):
@@ -59,11 +59,14 @@ class SoftmaxRegression:
         Y = np.eye(K)[y]                                 # one-hot targets, shape (n, K)
         self.W, self.b, self.losses = np.zeros((d, K)), np.zeros(K), []
         for _ in range(self.epochs):
-            P = softmax(X @ self.W + self.b)
+            Z = X @ self.W + self.b
+            P = softmax(Z)
             error = P - Y
             self.W -= self.learning_rate * X.T @ error / n
             self.b -= self.learning_rate * error.mean(axis=0)
-            self.losses.append(-np.mean(np.log(P[np.arange(n), y] + 1e-12)))
+            shifted = Z - Z.max(axis=1, keepdims=True)
+            self.losses.append(np.mean(np.log(np.exp(shifted).sum(axis=1))
+                                       - shifted[np.arange(n), y]))
         return self
 
     def predict_proba(self, X):

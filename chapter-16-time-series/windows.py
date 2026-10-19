@@ -6,7 +6,7 @@ LOOKBACK = 56
 
 
 def window(y, workingday, t, horizon, lookback=LOOKBACK):
-    """Inputs available at origin t: the scaled past and future working-day flags."""
+    """At first-target index t: history ends at t-1; future flags begin at t."""
     past = np.asarray(y[t - lookback:t], float)
     level = past.mean()                              # per-window scale
     return past / level, np.asarray(workingday[t:t + horizon], float), level

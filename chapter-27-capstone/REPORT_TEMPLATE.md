@@ -30,6 +30,12 @@ final test result for the locked procedure and relevant baseline. Define spread
 and uncertainty measures precisely. Do not substitute a favourable seed or omit
 an unsuccessful neural comparison.
 
+For an external-data project, preserve paired predictions and example or forecast
+identifiers for every comparator. Account for groups or time dependence in any
+uncertainty calculation. Measure end-to-end latency and peak memory on the target
+machine if they affect the recommendation; state the batch size, warm-up,
+thread count and included preprocessing. Mark unmeasured requirements explicitly.
+
 ## Error analysis
 
 Provide traceable examples and slice counts. Distinguish predeclared slices

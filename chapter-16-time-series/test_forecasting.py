@@ -1,6 +1,7 @@
 """Unit checks of the baselines, metrics, autocorrelation and the TCN."""
 
 from pathlib import Path
+from datetime import date, timedelta
 import sys
 
 import numpy as np
@@ -8,6 +9,21 @@ import pytest
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # sibling modules
+
+
+def test_first_target_and_history_cutoff_are_aligned(load_script):
+    backtest = load_script('backtest')
+    windows = load_script('windows')
+    starts = backtest.origins(731)
+    first = starts[0]
+    assert len(starts) == 25
+    assert date(2011, 1, 1) + timedelta(days=first) == date(2012, 7, 1)
+    assert all((date(2011, 1, 1) + timedelta(days=t)).weekday() == 6 for t in starts)
+    y, flags = np.arange(731, dtype=float), np.arange(731) % 2
+    past, future, level = windows.window(y, flags, first, backtest.HORIZON)
+    np.testing.assert_allclose(past * level, y[first - windows.LOOKBACK:first])
+    assert past[-1] * level == pytest.approx(y[first - 1])
+    np.testing.assert_array_equal(future, flags[first:first + backtest.HORIZON])
 
 
 def test_acf_matches_definition(load_script):

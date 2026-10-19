@@ -63,6 +63,14 @@ def test_ppo_clip(tmp_path):
         '  ratio 1.5: objective -1.50, gradient -1']
 
 
+def test_exact_policy_gradient_example(tmp_path):
+    assert run('policy_gradient_check.py', tmp_path) == [
+        'objective: 0.250000',
+        'finite-difference gradient: 0.125000',
+        'expected discounted estimate: 0.125000',
+        'without outer discount: 0.250000']
+
+
 def test_reinforce_demo(tmp_path):
     """Policy gradients learn the task for every seed, but not monotonically."""
     lines = run('reinforce_demo.py', tmp_path)

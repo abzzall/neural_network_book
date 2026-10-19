@@ -12,10 +12,16 @@ run and tested before it is published.
 
 - An example is added only after it has been run and its results checked by a
   test. Numbers quoted in the book come from running the code.
-- Dependencies are pinned to exact versions. A library is added together with
+- Direct dependencies are pinned to exact versions. A library is added together with
   the first tested example that uses it.
 - Virtual environments, caches, downloaded datasets, and model weights are
   kept out of version control.
+
+The [19 October 2026 review-correction record](validation/review-2026-10-19.json)
+lists the tested source hashes, complete installed package versions, commands
+and outcomes. It covers changed code and its dependants, with optional skips
+identified; it is not a fresh full-suite or clean-checkout result. Direct pins
+alone do not lock transitive dependencies or guarantee cross-platform equality.
 
 ## Quick start
 

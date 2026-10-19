@@ -62,3 +62,17 @@ def test_pairs_and_noise(load_script):
     p = sgns.noise_distribution([np.array([0, 0, 0, 1])], 3)
     assert p[2] == 0 and p.sum() == pytest.approx(1)
     assert p[0] / p[1] == pytest.approx(3 ** 0.75)
+
+
+@pytest.mark.parametrize('score', [-1000.0, 1000.0])
+def test_sgns_extreme_scores_keep_loss_and_gradients_finite(load_script, score):
+    sgns = load_script('sgns')
+    v, u, negatives = np.ones(1), np.array([score]), np.array([[-score]])
+    with np.errstate(over='raise', divide='raise', invalid='raise'):
+        loss, gv, gu, gn = sgns.loss_and_grads(v, u, negatives)
+    assert loss == pytest.approx(2000.0 if score < 0 else 0.0)
+    assert all(np.isfinite(g).all() for g in (gv, gu, gn))
+    h = 1e-5
+    numerical = (sgns.loss_and_grads(v + h, u, negatives)[0]
+                 - sgns.loss_and_grads(v - h, u, negatives)[0]) / (2 * h)
+    assert gv[0] == pytest.approx(numerical, abs=1e-7)

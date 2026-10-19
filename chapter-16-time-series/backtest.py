@@ -6,11 +6,11 @@ from baselines import holt_winters, moving_average, naive, seasonal_naive
 from bike_data import load
 from metrics import mae, mase
 
-HORIZON, FIRST_ORIGIN, STEP = 14, 547, 7      # forecasts from 2012-07-01, weekly
+HORIZON, FIRST_ORIGIN, STEP = 14, 547, 7      # first target 2012-07-01; history ends June 30
 
 
 def origins(n, horizon=HORIZON, first=FIRST_ORIGIN, step=STEP):
-    """Forecast origins t: train on y[:t], score y[t:t+horizon]."""
+    """First-target indices t: history y[:t], targets y[t:t+horizon]."""
     return list(range(first, n - horizon + 1, step))
 
 

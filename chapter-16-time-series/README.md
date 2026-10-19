@@ -39,6 +39,11 @@ Holt-Winters    MAE  1055.9  MASE 1.204
 The TCN reaches mean MASE 1.082 over seeds 42, 43 and 44 (standard deviation
 0.025); last digits can vary across platforms.
 
+The code's `t` is the first target index: history is `y[:t]`, ending at `t-1`.
+The first history ends on Saturday 30 June 2012, and the first target is Sunday
+1 July. All 25 first targets are Sundays; weekday and horizon position are
+therefore confounded in per-horizon errors.
+
 ## Optional pretrained forecaster
 
 `pretrained_forecast.py` needs the extra packages in `requirements-chronos.txt`
@@ -50,6 +55,9 @@ uv pip install -p .venv -r requirements-chronos.txt
 ```
 
 Its test is skipped when the package or the model is missing. Reference output:
+
+Here zero-shot means no local weight fitting on the target series. This
+experiment does not establish whether the series overlaps with pretraining data.
 
 ```text
 median forecast: MAE   993.9  MASE 1.135

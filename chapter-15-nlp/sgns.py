@@ -4,14 +4,16 @@ import numpy as np
 
 
 def sigmoid(z):
-    return 1 / (1 + np.exp(-z))
+    e = np.exp(-np.abs(z))
+    return np.where(z >= 0, 1 / (1 + e), e / (1 + e))
 
 
 def loss_and_grads(v_center, u_context, u_negatives):
     """Loss for one (centre, context) pair and k negative words, eq. (15.5)."""
-    pos = sigmoid(u_context @ v_center)          # probability the true pair is real
-    neg = sigmoid(u_negatives @ v_center)        # probabilities the noise pairs are real
-    loss = -np.log(pos) - np.log(1 - neg).sum()
+    pos_score, neg_scores = u_context @ v_center, u_negatives @ v_center
+    pos = sigmoid(pos_score)                    # probability the true pair is real
+    neg = sigmoid(neg_scores)                   # probabilities the noise pairs are real
+    loss = np.logaddexp(0, -pos_score) + np.logaddexp(0, neg_scores).sum()
     grad_v = (pos - 1) * u_context + neg @ u_negatives
     grad_u = (pos - 1) * v_center
     grad_negatives = neg[:, None] * v_center

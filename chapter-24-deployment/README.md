@@ -45,6 +45,13 @@ Their tests are skipped when the packages are missing. On the verified CPU the
 float32 ONNX model is 35,606 bytes and the int8 model 15,882 bytes, both with
 the PyTorch model's test accuracy of 0.9822; timings depend on the machine.
 
+The service accepts exactly 64 finite numbers in [0, 1]; strings and booleans
+are rejected before inference. Each prediction returns `model: "sha256:..."`
+for the exact self-contained ONNX bytes loaded. Preserve that file under its
+hash with the preprocessing and environment record. Replacing the file does
+not change a running service's cached snapshot: restart to deploy it.
+`/health` checks liveness only; it does not load or validate model readiness.
+
 ## Applied exercise
 
 ```bash

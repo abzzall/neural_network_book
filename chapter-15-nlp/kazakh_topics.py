@@ -45,7 +45,7 @@ def embed(texts):
     with torch.inference_mode():
         hidden = model(**batch).last_hidden_state
     mask = batch['attention_mask'][..., None]
-    vectors = (hidden * mask).sum(1) / mask.sum(1)            # mean pooling, eq. (15.5)
+    vectors = (hidden * mask).sum(1) / mask.sum(1)    # eq. (15.8) [eq:nlp-mean-pool]
     return torch.nn.functional.normalize(vectors, dim=1).numpy()
 
 

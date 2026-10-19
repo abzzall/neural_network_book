@@ -56,6 +56,18 @@ def test_returns_to_go(load_script):
     assert r.returns_to_go([1, 1, 1], 0.5) == [1.75, 1.5, 1.0]
 
 
+@pytest.mark.parametrize('theta', [-2.0, 0.0, 1.5])
+@pytest.mark.parametrize('gamma', [0.5, 1.0])
+def test_discounted_policy_gradient_matches_exact_objective(load_script, theta, gamma):
+    m = load_script('policy_gradient_check')
+    h = 1e-5
+    numerical = (m.objective(theta + h, gamma) - m.objective(theta - h, gamma)) / (2 * h)
+    assert m.expected_estimate(theta, gamma) == pytest.approx(numerical, abs=1e-10)
+    assert m.expected_estimate(theta, gamma, baseline=(0.7, -0.3)) == pytest.approx(numerical)
+    unweighted = m.expected_estimate(theta, gamma, outer_discount=False)
+    assert unweighted == pytest.approx(numerical / gamma)
+
+
 def test_solved_at(load_script):
     u = load_script('rl_utils')
     # the mean reaches 475 once 95 of the last 100 returns are 500: (5*10 + 95*500)/100

@@ -10,6 +10,7 @@ written in this folder; nothing is downloaded.
 | `q_learning.py` | Tabular Q-learning from experience, compared with the Bellman solution |
 | `cartpole.py` | The cart-pole task written out; matches Gymnasium CartPole-v1 step for step when Gymnasium is installed |
 | `hand_controller.py` | A one-line controller from physical intuition |
+| `policy_gradient_check.py` | Exact enumeration checks the discounted objective and an action-independent baseline |
 | `reinforce.py`, `reinforce_demo.py` | REINFORCE with a mean baseline, three seeds |
 | `ppo_clip.py` | PPO's clipped objective and its gradient |
 | `rl_utils.py` | Policy evaluation and the "solved" criterion (mean of 100 returns at least 475) |
@@ -19,6 +20,7 @@ written in this folder; nothing is downloaded.
 .venv/bin/python chapter-19-rl/value_iteration.py
 .venv/bin/python chapter-19-rl/q_learning.py
 .venv/bin/python chapter-19-rl/hand_controller.py
+.venv/bin/python chapter-19-rl/policy_gradient_check.py
 .venv/bin/python chapter-19-rl/reinforce_demo.py
 .venv/bin/python -m pytest chapter-19-rl --ignore-glob='*/based-on/*'
 ```
