@@ -1,4 +1,4 @@
-"""Chapter 25: a regression tree split by hand, and gradient boosting from scratch."""
+"""Chapter 26: a regression tree split by hand, and gradient boosting from scratch."""
 
 import numpy as np
 from sklearn.datasets import make_friedman1

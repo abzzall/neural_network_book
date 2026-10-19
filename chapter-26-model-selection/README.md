@@ -1,4 +1,4 @@
-# Chapter 25 — Choosing a Model in Practice
+# Chapter 26 — Choosing a Model in Practice
 
 Examples verified on a CPU with Python 3.14.4, scikit-learn 1.9.1 and pandas
 3.0.6 (17 October 2026). Run commands from the repository root. The credit data
@@ -9,11 +9,20 @@ are downloaded by chapter 23; the other data sets are bundled with scikit-learn.
 | `family_compare.py` | Logistic regression, gradient boosting and an MLP on two tables and one image set, 5-fold cross-validation |
 | `applied/` | A credit policy chosen by the data set's own cost matrix |
 | `boosting_scratch.py` | Listing, worked example | A regression tree split by hand and gradient boosting from scratch |
+| `modern_boosting.py` | Native missing values, early stopping and monotonic constraints in histogram boosting |
 
 ```bash
 .venv/bin/python chapter-23-interpretability/credit_data.py --download
-.venv/bin/python chapter-25-model-selection/family_compare.py
-.venv/bin/python -m pytest chapter-25-model-selection --ignore-glob='*/based-on/*'
+.venv/bin/python chapter-26-model-selection/family_compare.py
+.venv/bin/python chapter-26-model-selection/modern_boosting.py
+.venv/bin/python -m pytest chapter-26-model-selection --ignore-glob='*/based-on/*'
+```
+
+Expected output of `modern_boosting.py`:
+
+```text
+unconstrained AUC 0.8824, iterations  61, grid violations 8
+monotonic     AUC 0.8846, iterations  93, grid violations 0
 ```
 
 Expected output of `family_compare.py` (times depend on the machine):
@@ -36,8 +45,8 @@ digits (8x8 images, 1797), accuracy:
 ## Applied exercise
 
 ```bash
-.venv/bin/python chapter-25-model-selection/applied/full-code/credit_decision.py
-.venv/bin/python chapter-25-model-selection/applied/full-code/verify_results.py
+.venv/bin/python chapter-26-model-selection/applied/full-code/credit_decision.py
+.venv/bin/python chapter-26-model-selection/applied/full-code/verify_results.py
 ```
 
 Reference output:

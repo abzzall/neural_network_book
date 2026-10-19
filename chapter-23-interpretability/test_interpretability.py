@@ -93,3 +93,11 @@ def test_attribution_maps(tmp_path):
     shares = [float(line.rsplit(' ', 1)[1]) for line in lines]
     assert shares == pytest.approx([0.770, 0.617, 0.818], abs=0.02)
     assert len(list(tmp_path.glob('*.dat'))) == 12
+
+
+@pytest.mark.skipif(not DATA, reason='run credit_data.py --download first')
+def test_gap_spread(tmp_path):
+    assert run('gap_spread.py', tmp_path) == [
+        'with_age: parity gap -0.110, opportunity gap -0.176 to -0.047',
+        'group_threshold: parity gap 0.027, opportunity gap -0.066 to 0.094',
+        'without_age: parity gap -0.081, opportunity gap -0.151 to -0.041']

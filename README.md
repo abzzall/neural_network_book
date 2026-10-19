@@ -90,8 +90,9 @@ explains each step.
 | 22 | Pretrained Models and Transfer Learning | [`chapter-22-pretrained`](chapter-22-pretrained) |
 | 23 | Interpretability and Fairness | [`chapter-23-interpretability`](chapter-23-interpretability) |
 | 24 | Deployment and MLOps | [`chapter-24-deployment`](chapter-24-deployment) |
-| 25 | Choosing a Model in Practice | [`chapter-25-model-selection`](chapter-25-model-selection) |
-| 26 | Capstone Project | [`chapter-26-capstone`](chapter-26-capstone) |
+| 25 | Automated Model and Architecture Search | [`chapter-25-automl`](chapter-25-automl) |
+| 26 | Choosing a Model in Practice | [`chapter-26-model-selection`](chapter-26-model-selection) |
+| 27 | Capstone Project | [`chapter-27-capstone`](chapter-27-capstone) |
 
 Chapters 5–8 build networks from scratch with NumPy. From chapter 9 the book
 uses PyTorch.
@@ -130,3 +131,19 @@ describe the verified GPU build, compiler prerequisites and CPU-only skip behavi
 ## License
 
 Code: [MIT](LICENSE.md). The book manuscript is not included in that grant.
+
+## Reproducing results by resource group
+
+| Group | Examples | Extra resources |
+|---|---|---|
+| Base CPU | NumPy networks, digits, attention, synthetic graphs, architecture search | Installed base requirements |
+| Downloaded CPU | SMS, bike rentals, Kazakh topics, pretrained text and CLIP | Explicit `--download` in each chapter's loader; pinned cached files |
+| Image transfer | EuroSAT and ResNet features | Chapter 22 requirements, dataset and weights |
+| Forecasting | Chronos-Bolt | `requirements-chronos.txt`, bike data and checkpoint |
+| Deployment | ONNX export and HTTP service | `requirements-deployment.txt` |
+| GPU | CUDA timing, AMP, compilation, Triton | CUDA build, compatible device and chapter 11 prerequisites |
+
+Read each chapter's commands before downloading. A test skipped for missing data,
+weights, packages or hardware has not verified that result. Report the source
+revision, command, hardware, passed/skipped counts and available resources with a
+verification record. Runtime observations are not portable performance promises.

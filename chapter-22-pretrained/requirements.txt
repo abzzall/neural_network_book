@@ -1,0 +1,3 @@
+# Optional: the EuroSAT transfer experiment (transfer_eurosat.py), tested with torch 2.14.1.
+# Install from the same index as torch, e.g. the CPU index; see Appendix B.
+torchvision==0.29.1

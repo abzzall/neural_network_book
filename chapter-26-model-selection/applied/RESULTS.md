@@ -1,4 +1,4 @@
-# Chapter 25 applied exercise — results
+# Chapter 26 applied exercise — results
 
 | Quantity | Value |
 |---|---|

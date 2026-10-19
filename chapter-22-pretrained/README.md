@@ -7,15 +7,19 @@ from the repository root.
 | File | What is checked |
 |---|---|
 | `lora_numpy.py` | LoRA for one layer: parameter counts, identical start, merging, rank |
+| `nf4_numpy.py` | NF4 against uniform 4-bit quantisation, including block scales and packed-storage accounting |
 | `distillation.py` | A 16-unit student distilled from a 256-unit teacher without labels, three seeds |
 | `clip_model.py`, `clip_zero_shot.py` | Zero-shot classification of generated coloured shapes with CLIP |
+| `transfer_eurosat.py` | Frozen random versus ImageNet-pretrained ResNet-18 features on a fixed EuroSAT split |
 | `applied/` | Linear probe vs full fine-tuning vs LoRA with 200 labels |
 
 ```bash
 .venv/bin/python chapter-22-pretrained/lora_numpy.py
+.venv/bin/python chapter-22-pretrained/nf4_numpy.py
 .venv/bin/python chapter-22-pretrained/distillation.py
 .venv/bin/python chapter-22-pretrained/clip_model.py --download
 .venv/bin/python chapter-22-pretrained/clip_zero_shot.py
+.venv/bin/python chapter-22-pretrained/transfer_eurosat.py --download
 .venv/bin/python -m pytest chapter-22-pretrained --ignore-glob='*/based-on/*'
 ```
 
@@ -36,6 +40,12 @@ seed 2: teacher 0.9722, 100 labels 0.9056, all labels 0.9685, distilled, no labe
   revision `1a25a446`), MIT licence, 151M parameters. Cached in `data/`.
 - The applied exercise reuses the SMS Spam Collection and all-MiniLM-L6-v2 of
   chapter 15 (see that chapter's README for sources and licences).
+- **EuroSAT RGB** (Zenodo record 7711810, MIT licence) contains 27,000
+  Sentinel-2 patches. `transfer_eurosat.py` verifies its published digest and
+  uses a deterministic class-balanced subset. It compares frozen features, not
+  a state-of-the-art remote-sensing system.
+- **ResNet-18 ImageNet-1K V1** is loaded through TorchVision 0.29.1
+  (BSD-3-Clause). Its prescribed resize, crop and normalisation are used unchanged.
 
 ## Applied exercise
 
@@ -55,3 +65,17 @@ full_macro_f1_mean: 0.964973
 lora_macro_f1_mean: 0.960363
 lora_macro_f1_min: 0.954313
 ```
+
+## Repeated real-image transfer comparison
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 .venv/bin/python chapter-22-pretrained/transfer_eurosat.py --device cpu --repeat-seeds 0 1 2
+```
+
+Each split uses 20 training and 100 test patches per class for both heads. The
+random encoder is fixed; split membership varies. Pretrained features improved
+accuracy by about 30 percentage points on each of the three measured splits.
+The splits overlap and do not establish geographic generalisation: use spatial
+groups for deployment to new regions. Scores can vary slightly with numerical
+libraries and threading; the script prints each result rather than a hard-coded
+reference. A single-run regression test checks the substantial gain with tolerance.

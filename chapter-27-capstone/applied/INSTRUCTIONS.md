@@ -61,9 +61,9 @@ Record the source revision and working-tree state in the report.
 From the repository root:
 
 ```bash
-.venv/bin/python -m pytest chapter-26-capstone/applied/based-on/test_capstone_project.py
-.venv/bin/python chapter-26-capstone/applied/based-on/capstone_project.py --output outputs/capstone/results.json
-.venv/bin/python chapter-26-capstone/applied/full-code/verify_results.py outputs/capstone/results.json
+.venv/bin/python -m pytest chapter-27-capstone/applied/based-on/test_capstone_project.py
+.venv/bin/python chapter-27-capstone/applied/based-on/capstone_project.py --output outputs/capstone/results.json
+.venv/bin/python chapter-27-capstone/applied/full-code/verify_results.py outputs/capstone/results.json
 ```
 
 The untouched starter fails intentionally. Filling its functions gives the

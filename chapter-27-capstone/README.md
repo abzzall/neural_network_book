@@ -1,4 +1,4 @@
-# Chapter 26 — Capstone Project
+# Chapter 27 — Capstone Project
 
 A reproducible project scaffold, five data-type tracks and a completed synthetic
 classification example. The example compares linear and quadratic logistic
@@ -14,9 +14,9 @@ The original synthetic generator and examples use the repository MIT licence.
 From the repository root:
 
 ```bash
-.venv/bin/python chapter-26-capstone/project_demo.py
-.venv/bin/python chapter-26-capstone/applied/full-code/capstone_project.py --output outputs/capstone/results.json
-.venv/bin/python chapter-26-capstone/applied/full-code/verify_results.py outputs/capstone/results.json
+.venv/bin/python chapter-27-capstone/project_demo.py
+.venv/bin/python chapter-27-capstone/applied/full-code/capstone_project.py --output outputs/capstone/results.json
+.venv/bin/python chapter-27-capstone/applied/full-code/verify_results.py outputs/capstone/results.json
 ```
 
 The generated data have 1200 independent rows and six features. Split sizes

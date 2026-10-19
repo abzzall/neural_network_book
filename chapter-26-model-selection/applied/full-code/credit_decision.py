@@ -1,4 +1,4 @@
-"""INCOMPLETE exercise starter. Credit decisions under the documented costs of the German Credit data.
+"""Credit decisions under the documented costs of the German Credit data.
 
 Approving a bad risk costs 5, rejecting a good one costs 1 (the data set's own
 cost matrix). Policies are compared by the mean cost per applicant on test data,
@@ -23,13 +23,15 @@ COST_APPROVE_BAD, COST_REJECT_GOOD = 5.0, 1.0
 
 
 def mean_cost(approve, good):
-    """Step 1: average cost per applicant, eq. (25.1)."""
-    raise NotImplementedError("Step 1: complete mean_cost")
+    """Step 1: average cost per applicant, eq. (26.3)."""
+    approve, good = np.asarray(approve, bool), np.asarray(good, bool)
+    return float((COST_APPROVE_BAD * (approve & ~good)
+                  + COST_REJECT_GOOD * (~approve & good)).mean())
 
 
 def bayes_threshold():
-    """Step 2: approve when P(good) exceeds this value, eq. (25.2)."""
-    raise NotImplementedError("Step 2: complete bayes_threshold")
+    """Step 2: approve when P(good) exceeds this value, eq. (26.4)."""
+    return COST_APPROVE_BAD / (COST_APPROVE_BAD + COST_REJECT_GOOD)
 
 
 def boosting_model(columns):
@@ -40,7 +42,11 @@ def boosting_model(columns):
 
 def policies(X_train, y_train, X_test):
     """Step 3: approval decisions of four policies for the test applicants."""
-    raise NotImplementedError("Step 3: complete policies")
+    t = bayes_threshold()
+    p_lr = logistic_model(X_train.columns).fit(X_train, y_train).predict_proba(X_test)[:, 1]
+    p_gb = boosting_model(X_train.columns).fit(X_train, y_train).predict_proba(X_test)[:, 1]
+    return {'approve_all': np.ones(len(X_test), bool), 'logistic_at_0.5': p_lr >= 0.5,
+            'logistic_at_cost_threshold': p_lr >= t, 'boosting_at_cost_threshold': p_gb >= t}
 
 
 def run(seeds=range(5)):

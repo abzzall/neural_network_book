@@ -42,3 +42,14 @@ def test_boosting_scratch(tmp_path):
         ' 10 trees: training MSE 9.945, validation MSE 9.822',
         ' 50 trees: training MSE 1.620, validation MSE 3.076',
         '200 trees: training MSE 0.459, validation MSE 2.064']
+
+
+def test_modern_boosting(tmp_path):
+    lines = subprocess.run([sys.executable, str(HERE / 'modern_boosting.py')], cwd=tmp_path,
+                           capture_output=True, text=True, check=True, timeout=600).stdout.splitlines()
+    assert len(lines) == 2
+    assert lines[0].startswith('unconstrained AUC ')
+    assert lines[1].startswith('monotonic     AUC ')
+    auc = [float(line.split()[2].rstrip(',')) for line in lines]
+    assert min(auc) > 0.84
+    assert lines[1].endswith('grid violations 0')
