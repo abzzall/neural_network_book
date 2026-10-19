@@ -5,6 +5,12 @@ validation split, refits the selected procedure on the development data, and use
 the test set once. It is deliberately small enough to show the protocol on a CPU;
 production NAS uses more efficient search and substantially larger budgets.
 
+The demonstration prints candidate-search time separately from final-refit time;
+neither is a portable performance target. Its eight candidates use internal early
+stopping with at most 400 iterations. The ten-candidate applied exercise below
+uses at most 200 iterations without internal early stopping, so the different
+selected models do not isolate the effect of adding candidates.
+
 ```bash
 .venv/bin/python chapter-25-automl/nas_search.py
 .venv/bin/python -m pytest chapter-25-automl

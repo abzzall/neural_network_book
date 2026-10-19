@@ -59,6 +59,21 @@ def test_nf4_beats_uniform_for_normal_weights():
     assert errors[1] < errors[0]
 
 
+def test_nf4_script_matches_textbook(tmp_path):
+    lines = run('nf4_numpy.py', tmp_path)
+    assert len(lines) == 4
+    assert lines[0].startswith('NF4 levels: ')
+    levels = [float(value) for value in lines[0].split(': ', 1)[1].split()]
+    assert levels == pytest.approx(nf4_numpy.NF4, abs=0.00005)
+    for line, expected in zip(lines[1:3], ((0.1006, 0.1007), (0.0919, 0.0917))):
+        values = re.search(r'weights ([0-9.]+), outputs ([0-9.]+)$', line)
+        assert values is not None
+        assert tuple(map(float, values.groups())) == pytest.approx(expected, abs=0.0002)
+    assert lines[3] == (
+        'theoretical packed storage: 4.50 bits per weight against 16 for bfloat16, '
+        '0.562 MiB against 2.000 MiB')
+
+
 def test_eurosat_split_is_disjoint_and_reproducible(tmp_path):
     for name in ('a', 'b'):
         folder = tmp_path / name

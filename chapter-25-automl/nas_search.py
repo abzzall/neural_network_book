@@ -32,11 +32,15 @@ if __name__ == '__main__':
         model.fit(X_train, y_train)
         results.append((accuracy_score(y_val, model.predict(X_val)), widths, alpha))
 
+    search_seconds = time.perf_counter() - start
     validation, widths, alpha = max(results, key=lambda row: row[0])
+    refit_start = time.perf_counter()
     final = make_pipeline(StandardScaler(), MLPClassifier(
         hidden_layer_sizes=widths, alpha=alpha, early_stopping=True,
         max_iter=400, random_state=0)).fit(X_dev, y_dev)
+    refit_seconds = time.perf_counter() - refit_start
     test = accuracy_score(y_test, final.predict(X_test))
     print(f'candidates {len(results)}, selected {widths}, alpha {alpha:g}')
     print(f'validation accuracy {validation:.4f}, final test accuracy {test:.4f}')
-    print(f'search seconds {time.perf_counter() - start:.2f}')
+    print(f'search seconds {search_seconds:.2f}')
+    print(f'final refit seconds {refit_seconds:.2f}')
